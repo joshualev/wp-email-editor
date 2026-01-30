@@ -1,0 +1,405 @@
+<!--
+    templateType: email
+    isAvailableForNewContent: true
+-->
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="x-apple-disable-message-reformatting"/>
+  <title>{% if content.html_title and content.html_title != '' %}{{ content.html_title }}{% else %}{{ content.body.subject }}{% endif %}</title>
+  {% if content.meta_description %}<meta name="description" content="{{ content.meta_description }}"/>{% endif %}
+  
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:AllowPNG/>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <style type="text/css">
+    table { border-collapse: collapse; }
+    .mobile-stack { width: auto !important; }
+  </style>
+  <![endif]-->
+  
+  <style type="text/css" id="hs-inline-css">
+    /*<![CDATA[*/
+    
+    body, table, td, p, a, li, blockquote { 
+      -webkit-text-size-adjust: 100%; 
+      -ms-text-size-adjust: 100%; 
+    }
+    table, td { 
+      mso-table-lspace: 0pt; 
+      mso-table-rspace: 0pt; 
+      border-collapse: collapse;
+    }
+    img { 
+      -ms-interpolation-mode: bicubic; 
+      border: 0; 
+      height: auto; 
+      line-height: 100%; 
+      outline: none; 
+      text-decoration: none; 
+    }
+    body { 
+      margin: 0 !important; 
+      padding: 0 !important; 
+      width: 100% !important; 
+    }
+    a[x-apple-data-detectors] { 
+      color: inherit !important; 
+      text-decoration: none !important; 
+      font-size: inherit !important; 
+      font-family: inherit !important; 
+      font-weight: inherit !important; 
+      line-height: inherit !important; 
+    }
+    
+    @media only screen and (max-width: 620px) {
+      .wrapper { width: 100% !important; }
+      .mobile-full-width { width: 100% !important; max-width: 100% !important; }
+      .mobile-stack { 
+        display: block !important; 
+        width: 100% !important; 
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .mobile-center { text-align: center !important; }
+      .mobile-padding { padding-left: 15px !important; padding-right: 15px !important; }
+      .mobile-img { width: 100% !important; height: auto !important; }
+    }
+    
+    /*]]>*/
+  </style>
+</head>
+
+<body style="margin: 0; padding: 0; background-color: #F5F5F5;">
+
+  <div id="preview_text" style="display: none; font-size: 1px; color: #F5F5F5; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">
+    {% text "preview_text" label="Preview Text", value="", no_wrapper=True %}
+  </div>
+  
+  {% if content.create_page %}
+  <div style="text-align: center; padding: 10px; font-family: Arial, sans-serif; font-size: 12px; color: #666666;">
+    Not rendering correctly? <a data-viewaswebpage="true" href="{{ view_as_page_url }}" style="color: #0066cc;">View this email as a web page</a>.
+  </div>
+  {% endif %}
+
+
+{# =============================================================================
+   DATA LAYER
+   ============================================================================= #}
+{# Set the name to whatever you created via the plugin (slugified) #}
+{% set table_rows = hubdb_table_rows("demotable") %}
+
+{% set root_row = table_rows|selectattr("block_id", "equalto", "root")|first %}
+{% set header_row = table_rows|selectattr("block_id", "equalto", "hubspot-header")|first %}
+{% set footer_row = table_rows|selectattr("block_id", "equalto", "hubspot-footer")|first %}
+
+{% set root_data = root_row.block_data|fromjson if root_row else {"backdropColor": "#F5F5F5", "canvasColor": "#FFFFFF", "textColor": "#262626", "fontFamily": "MODERN_SANS", "childrenIds": []} %}
+{% set header_data = header_row.block_data|fromjson if header_row else {"fullWidth": false, "backgroundColor": "#F5F5F5"} %}
+{% set footer_data = footer_row.block_data|fromjson if footer_row else {"fullWidth": false, "backgroundColor": "#F5F5F5"} %}
+
+{% set backdrop_color = root_data.backdropColor|default("#F5F5F5") %}
+{% set canvas_color = root_data.canvasColor|default("#FFFFFF") %}
+{% set global_font_key = root_data.fontFamily|default("MODERN_SANS") %}
+
+{% set content_width = "100%" if header_data.fullWidth else "600" %}
+{% set content_max_width = "none" if header_data.fullWidth else "600px" %}
+{% set content_class = "" if header_data.fullWidth else "mobile-full-width" %}
+
+{% set footer_bg = footer_data.backgroundColor|default("#F5F5F5") %}
+{% set footer_width = "100%" if footer_data.fullWidth else "600" %}
+{% set footer_max_width = "none" if footer_data.fullWidth else "600px" %}
+{% set footer_class = "" if footer_data.fullWidth else "mobile-full-width" %}
+
+
+{# =============================================================================
+   UTILITY MACROS
+   ============================================================================= #}
+
+{% macro get_font_family(key) %}{% if key == "MODERN_SANS" %}Arial, Helvetica, sans-serif{% elif key == "CLASSIC_SERIF" %}Georgia, Times, 'Times New Roman', serif{% elif key == "MONOSPACE" %}'Courier New', Courier, monospace{% else %}Arial, Helvetica, sans-serif{% endif %}{% endmacro %}
+
+{% macro get_font_size(key) %}{% if key == "xs" %}11px{% elif key == "s" %}13px{% elif key == "m" %}15px{% elif key == "l" %}18px{% elif key == "xl" %}24px{% elif key == "xxl" %}32px{% else %}15px{% endif %}{% endmacro %}
+
+{% macro get_heading_size(size_key, heading_type) %}{% if heading_type == "h1" %}{% if size_key == "s" %}24px{% elif size_key == "m" %}28px{% elif size_key == "l" %}32px{% elif size_key == "xl" %}40px{% else %}28px{% endif %}{% elif heading_type == "h2" %}{% if size_key == "s" %}18px{% elif size_key == "m" %}22px{% elif size_key == "l" %}26px{% elif size_key == "xl" %}32px{% else %}22px{% endif %}{% elif heading_type == "h3" %}{% if size_key == "s" %}15px{% elif size_key == "m" %}18px{% elif size_key == "l" %}20px{% elif size_key == "xl" %}24px{% else %}18px{% endif %}{% elif heading_type == "h4" %}{% if size_key == "s" %}13px{% elif size_key == "m" %}15px{% elif size_key == "l" %}17px{% elif size_key == "xl" %}20px{% else %}15px{% endif %}{% else %}22px{% endif %}{% endmacro %}
+
+{% macro get_border_radius(key) %}{% if key == "none" %}0{% elif key == "small" %}4px{% elif key == "medium" %}8px{% elif key == "large" %}16px{% elif key == "full" %}9999px{% else %}0{% endif %}{% endmacro %}
+
+{% macro get_button_radius(variant) %}{% if variant == "rectangle" %}0{% elif variant == "pill" %}9999px{% elif variant == "rounded" %}6px{% else %}6px{% endif %}{% endmacro %}
+
+
+{# =============================================================================
+   BLOCK MACROS
+   ============================================================================= #}
+
+{% macro render_text(data, global_font) %}
+{% if not data.hidden %}
+{% set typo = data.typography %}
+{% set layout = data.layout %}
+{% set p = layout.padding %}
+{% set bg = layout.background.color if layout.background.color and layout.background.color != "transparent" else "" %}
+{% set ff = get_font_family(typo.fontFamily if typo.fontFamily else global_font) %}
+{% set fs = get_font_size(typo.fontSize) %}
+{% set ta = typo.textAlign.desktop if typo.textAlign and typo.textAlign.desktop else "left" %}
+{% set fw = typo.fontWeight if typo.fontWeight else "normal" %}
+{% set tc = typo.color if typo.color else "#262626" %}
+<table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+  <tr>
+    <td align="{{ ta }}" style="padding: {{ p.top }}px {{ p.right }}px {{ p.bottom }}px {{ p.left }}px;{% if bg %} background-color: {{ bg }};{% endif %}">
+      <p style="margin: 0; font-family: {{ ff }}; font-size: {{ fs }}; font-weight: {{ fw }}; line-height: 1.5; color: {{ tc }}; text-align: {{ ta }};">{{ data.content }}</p>
+    </td>
+  </tr>
+</table>
+{% endif %}
+{% endmacro %}
+
+
+{% macro render_heading(data, global_font) %}
+{% if not data.hidden %}
+{% set typo = data.typography %}
+{% set layout = data.layout %}
+{% set p = layout.padding %}
+{% set bg = layout.background.color if layout.background.color and layout.background.color != "transparent" else "" %}
+{% set ff = get_font_family(typo.fontFamily if typo.fontFamily else global_font) %}
+{% set ht = data.headingType if data.headingType else "h2" %}
+{% set fs = get_heading_size(typo.fontSize, ht) %}
+{% set ta = typo.textAlign.desktop if typo.textAlign and typo.textAlign.desktop else "left" %}
+{% set fw = typo.fontWeight if typo.fontWeight else "bold" %}
+{% set tc = typo.color if typo.color else "#111111" %}
+{% set hs = "margin: 0; font-family: " ~ ff ~ "; font-size: " ~ fs ~ "; font-weight: " ~ fw ~ "; line-height: 1.3; color: " ~ tc ~ "; text-align: " ~ ta ~ ";" %}
+<table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+  <tr>
+    <td align="{{ ta }}" style="padding: {{ p.top }}px {{ p.right }}px {{ p.bottom }}px {{ p.left }}px;{% if bg %} background-color: {{ bg }};{% endif %}">
+      {% if ht == "h1" %}<h1 style="{{ hs }}">{{ data.content }}</h1>{% elif ht == "h3" %}<h3 style="{{ hs }}">{{ data.content }}</h3>{% elif ht == "h4" %}<h4 style="{{ hs }}">{{ data.content }}</h4>{% else %}<h2 style="{{ hs }}">{{ data.content }}</h2>{% endif %}
+    </td>
+  </tr>
+</table>
+{% endif %}
+{% endmacro %}
+
+
+{% macro render_button(data, global_font) %}
+{% if not data.hidden %}
+{% set typo = data.typography %}
+{% set layout = data.layout %}
+{% set p = layout.padding %}
+{% set btn = data.button %}
+{% set btn_bg = layout.background.color if layout.background.color and layout.background.color != "transparent" else "#000000" %}
+{% set ff = get_font_family(typo.fontFamily if typo.fontFamily else global_font) %}
+{% set fs = get_font_size(typo.fontSize) %}
+{% set ta = typo.textAlign.desktop if typo.textAlign and typo.textAlign.desktop else "center" %}
+{% set br = get_button_radius(btn.variant) %}
+{% set btn_url = btn.url if btn.url else "#" %}
+{% set txt_color = typo.color if typo.color else "#ffffff" %}
+{% set fw = typo.fontWeight if typo.fontWeight else "normal" %}
+{% set arc = "50" if btn.variant == "pill" else "15" if btn.variant == "rounded" else "0" %}
+<table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+  <tr>
+    <td align="{{ ta }}" style="padding: {{ p.top }}px {{ p.right }}px {{ p.bottom }}px {{ p.left }}px;">
+      <!--[if mso]>
+      <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{ btn_url }}" style="height: 40px; v-text-anchor: middle;" arcsize="{{ arc }}%" strokecolor="{{ btn_bg }}" fillcolor="{{ btn_bg }}">
+        <w:anchorlock/>
+        <center style="color: {{ txt_color }}; font-family: {{ ff }}; font-size: {{ fs }}; font-weight: {{ fw }};">{{ data.content }}</center>
+      </v:roundrect>
+      <![endif]-->
+      <!--[if !mso]><!-->
+      <a href="{{ btn_url }}" target="_blank" style="display: inline-block; background-color: {{ btn_bg }}; color: {{ txt_color }}; font-family: {{ ff }}; font-size: {{ fs }}; font-weight: {{ fw }}; text-decoration: none; padding: 12px 24px; border-radius: {{ br }}; mso-hide: all;">{{ data.content }}</a>
+      <!--<![endif]-->
+    </td>
+  </tr>
+</table>
+{% endif %}
+{% endmacro %}
+
+
+{% macro render_divider(data) %}
+{% if not data.hidden %}
+{% set divider = data.divider %}
+{% set layout = data.layout %}
+{% set p = layout.padding %}
+{% set div_color = layout.background.color if layout.background.color and layout.background.color != "transparent" else "#cccccc" %}
+{% set div_style = divider.style if divider.style else "solid" %}
+{% set div_thick = divider.thickness if divider.thickness else 1 %}
+{% set div_width = divider.width|int if divider.width is number else 100 %}
+<table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+  <tr>
+    <td align="center" style="padding: {{ p.top }}px {{ p.right }}px {{ p.bottom }}px {{ p.left }}px;">
+      <table border="0" cellpadding="0" cellspacing="0" width="{{ div_width }}%" role="presentation">
+        <tr>
+          <td style="border-top: {{ div_thick }}px {{ div_style }} {{ div_color }}; font-size: 1px; line-height: 1px;">&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+{% endif %}
+{% endmacro %}
+
+
+{% macro render_image(data, image_obj) %}
+{% set img = image_obj if image_obj else data.image %}
+{% set layout = data.layout if data.layout else {"padding": {"top": 5, "right": 10, "bottom": 5, "left": 10}, "background": {"color": ""}} %}
+{% set hidden = data.hidden if data.hidden is defined else false %}
+{% if not hidden %}
+{% set p = layout.padding %}
+{% set bg = layout.background.color if layout.background.color and layout.background.color != "transparent" else "" %}
+{% set img_align = img.alignment.horizontal.desktop if img.alignment and img.alignment.horizontal and img.alignment.horizontal.desktop else "center" %}
+{% set br = get_border_radius(img.borderRadius) %}
+{% set link_url = img.linkUrl if img.linkUrl else "" %}
+<table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+  <tr>
+    <td align="{{ img_align }}" style="padding: {{ p.top }}px {{ p.right }}px {{ p.bottom }}px {{ p.left }}px;{% if bg %} background-color: {{ bg }};{% endif %}">
+      {% if link_url %}<a href="{{ link_url }}" target="_blank" style="text-decoration: none;">{% endif %}<img src="{{ img.url }}" alt="{{ img.alt if img.alt else '' }}" style="display: block; width: 100%; height: auto;{% if br != '0' %} border-radius: {{ br }};{% endif %}" class="mobile-img"/>{% if link_url %}</a>{% endif %}
+    </td>
+  </tr>
+</table>
+{% endif %}
+{% endmacro %}
+
+
+{% macro render_blogpost(data, global_font) %}
+{% for comp in data.components %}
+  {% if comp.type == "Image" %}{{ render_image(comp.data, comp.data.image) }}{% elif comp.type == "Heading" %}{{ render_heading(comp.data, global_font) }}{% elif comp.type == "Text" %}{{ render_text(comp.data, global_font) }}{% elif comp.type == "Button" %}{{ render_button(comp.data, global_font) }}{% elif comp.type == "Divider" %}{{ render_divider(comp.data) }}{% endif %}
+{% endfor %}
+{% endmacro %}
+
+
+{% macro render_block(block_row, global_font) %}
+{% set block_data = block_row.block_data|fromjson %}
+{% set block_type = block_row.block_type %}
+{% if block_type == "Text" %}{{ render_text(block_data, global_font) }}{% elif block_type == "Heading" %}{{ render_heading(block_data, global_font) }}{% elif block_type == "Button" %}{{ render_button(block_data, global_font) }}{% elif block_type == "Divider" %}{{ render_divider(block_data) }}{% elif block_type == "Image" %}{{ render_image(block_data, block_data.image) }}{% elif block_type == "BlogPost" %}{{ render_blogpost(block_data, global_font) }}{% endif %}
+{% endmacro %}
+
+
+{# =============================================================================
+   LAYOUT MACROS
+   ============================================================================= #}
+
+{% macro render_column_content(col_children, all_rows, global_font) %}
+<table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+  {% for child_id in col_children %}
+  {% set child_row = all_rows|selectattr("block_id", "equalto", child_id)|first %}
+  {% if child_row %}
+  <tr>
+    <td>{{ render_block(child_row, global_font) }}</td>
+  </tr>
+  {% endif %}
+  {% endfor %}
+</table>
+{% endmacro %}
+
+
+{% macro render_columns_container(container_row, all_rows, global_font) %}
+{% set container_data = container_row.block_data|fromjson %}
+{% set layout = container_data.layout %}
+{% set p = layout.padding %}
+{% set bg = layout.background.color if layout.background.color and layout.background.color != "transparent" else "" %}
+{% set widths = container_data.widths %}
+{% set children_ids = container_data.childrenIds %}
+{% set content_align = container_data.contentAlignment|default("top") %}
+{% set total_width = widths|sum %}
+<table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" style="{% if bg %}background-color: {{ bg }};{% endif %}">
+  <tr>
+    <td align="center" style="padding: {{ p.top }}px {{ p.right }}px {{ p.bottom }}px {{ p.left }}px;">
+      <table border="0" cellpadding="0" cellspacing="0" width="{{ total_width }}" class="mobile-full-width" role="presentation" style="max-width: {{ total_width }}px; table-layout: fixed;">
+        <tr>
+          {% for col_idx in range(children_ids|length) %}
+          {% set col_children = children_ids[col_idx] %}
+          {% if col_children|length > 0 %}
+          {% set col_width = widths[col_idx] if col_idx < widths|length else 300 %}
+          <td width="{{ col_width }}" valign="{{ content_align }}" class="mobile-stack" style="width: {{ col_width }}px; vertical-align: {{ content_align }};">
+            {{ render_column_content(col_children, all_rows, global_font) }}
+          </td>
+          {% endif %}
+          {% endfor %}
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+{% endmacro %}
+
+
+{# =============================================================================
+   MAIN EMAIL STRUCTURE
+   ============================================================================= #}
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" style="background-color: {{ backdrop_color }};">
+  <tr>
+    <td align="center">
+      
+      <!-- HEADER -->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" style="background-color: {{ header_data.backgroundColor|default(backdrop_color) }};">
+        <tr>
+          <td align="center" style="padding: 20px 10px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="{{ content_width }}" class="{{ content_class }}" role="presentation" style="max-width: {{ content_max_width }};">
+              <tr>
+                <td align="center" style="padding: 10px 20px;">
+                  {% module "email_template_logo" path="@hubspot/email_logo" label="Logo" %}
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      
+      <!-- MAIN CONTENT -->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" style="background-color: {{ backdrop_color }};">
+        <tr>
+          <td align="center" style="padding: 0 10px 20px 10px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="{{ content_width }}" class="{{ content_class }}" role="presentation" style="background-color: {{ canvas_color }}; max-width: {{ content_max_width }};">
+              <tr>
+                <td>
+                  {% for container_id in root_data.childrenIds %}
+                  {% set container_row = table_rows|selectattr("block_id", "equalto", container_id)|first %}
+                  {% if container_row and container_row.block_type == "ColumnsContainer" %}
+                  {{ render_columns_container(container_row, table_rows, global_font_key) }}
+                  {% endif %}
+                  {% endfor %}
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      
+      <!-- FOOTER -->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" style="background-color: {{ footer_bg }};">
+        <tr>
+          <td align="center" style="padding: 20px 10px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="{{ footer_width }}" class="{{ footer_class }}" role="presentation" style="max-width: {{ footer_max_width }};">
+              <tr>
+                <td align="center" style="padding: 20px; font-family: Arial, sans-serif; font-size: 12px; line-height: 1.6; color: #666666;">
+                  {{ site_settings.company_name }}&nbsp;
+                  {{ site_settings.company_street_address_1 }}&nbsp;
+                  {{ site_settings.company_street_address_2 }}&nbsp;
+                  {{ site_settings.company_city }}&nbsp;
+                  {{ site_settings.company_state }}&nbsp;
+                  {{ site_settings.company_zip }}&nbsp;
+                  {{ site_settings.company_country }}
+                  <br/><br/>
+                  You received this email because you are subscribed to {{ subscription_name }} from {{ site_settings.company_name }}.
+                  <br/><br/>
+                  <a data-unsubscribe="true" href="{{ unsubscribe_link }}" style="color: #0066cc;">Update your email preferences</a> to choose the types of emails you receive.
+                  <br/>
+                  <a data-unsubscribe="true" href="{{ unsubscribe_link_all }}" style="color: #0066cc;">Unsubscribe from all future emails.</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

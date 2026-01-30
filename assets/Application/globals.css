@@ -1,0 +1,22 @@
+#wpcontent {
+	padding-left: 0 !important;
+}
+#wpbody-content {
+	padding-bottom: 0 !important;
+}
+#wpfooter {
+	display: none;
+}
+#wpcontent,
+#wpfooter {
+	padding: 0 !important;
+	margin: 0 !important;
+}
+#adminmenuback {
+	z-index: 9990;
+}
+
+body.wp-admin.toplevel_page_wp-hubspot-edm-editor {
+	padding-right: 0 !important;
+	overflow: hidden !important;
+}

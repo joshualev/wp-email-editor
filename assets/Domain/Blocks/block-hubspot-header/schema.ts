@@ -1,0 +1,9 @@
+import { z } from 'zod';
+
+export const HUBSPOT_HEADER_SCHEMA = z.object({
+  type: z.literal('HubSpotHeader'),
+  data: z.object({
+    fullWidth: z.boolean().default(false),
+    backgroundColor: z.string().default('#f5f5f5'),
+  }),
+});
