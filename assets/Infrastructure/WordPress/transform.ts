@@ -25,10 +25,10 @@
  * - sponsored_content: Sponsor name field
  * - tribe_events: Event start/end dates from meta
  *
- * @module Infrastructure/Wordpress
+ * @module Infrastructure/WordPress
  */
 import { TWordPressPost } from '@/Domain/types'
-import { WordPressPostDto } from '@/Infrastructure/Wordpress/dto';
+import { WordPressPostDto } from '@/Infrastructure/WordPress/dto';
 
 import { formatDate, stripHtml } from '@/utils/format'
 

@@ -19,10 +19,10 @@
  * - sponsored_content: Sponsored articles
  * - tribe_events: The Events Calendar events
  *
- * @module Infrastructure/Wordpress
+ * @module Infrastructure/WordPress
  */
-import { TWordPressPostType, WordPressPostDto, WordPressPostTypeDto } from '@/Infrastructure/Wordpress/dto';
-import { TransformWordPressPostDtoToDomain } from '@/Infrastructure/Wordpress/transform';
+import { TWordPressPostType, WordPressPostDto, WordPressPostTypeDto } from '@/Infrastructure/WordPress/dto';
+import { TransformWordPressPostDtoToDomain } from '@/Infrastructure/WordPress/transform';
 import { createApiClient } from '@/Infrastructure/client';
 
 /** API client configured for WordPress REST API v2 */
@@ -138,13 +138,13 @@ export const wordpressApi = {
    * @returns Array of post type definitions
    */
   fetchPostTypes: () =>
-    api.request<WordPressPostTypeDto[]>({
+    api.request<Record<string, WordPressPostTypeDto>>({
       path: '/types',
       method: 'GET'
     }).then(response => {
       if (response.error) return [];
       // Response is an object, not array - convert to array and filter
-      const types = Object.values(response.data as Record<string, WordPressPostTypeDto>);
+      const types = Object.values(response.data ?? {});
       return types
         .filter(type => !EXCLUDED_POST_TYPES.includes(type.slug))
         .map(type => ({

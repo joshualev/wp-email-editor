@@ -10,7 +10,7 @@ import {
 
 import { HORIZONTAL_ALIGN_VALUES } from '@/Domain/Blocks/helpers/layout';
 
-describe('typography domain helpers', () => {
+describe('typography helpers', () => {
   it('coerces legacy textAlign string into responsive object with mobile default', () => {
     const parsed = RESPONSIVE_TEXT_ALIGN_SCHEMA.parse('right');
     expect(parsed).toEqual({ desktop: 'right', mobile: 'center' });

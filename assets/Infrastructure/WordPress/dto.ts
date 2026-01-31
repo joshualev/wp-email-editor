@@ -15,7 +15,7 @@
  * The transform layer converts these DTOs to domain types.
  *
  * @see TransformWordPressPostDtoToDomain For DTO → domain conversion
- * @module Infrastructure/Wordpress
+ * @module Infrastructure/WordPress
  */
 
 /**

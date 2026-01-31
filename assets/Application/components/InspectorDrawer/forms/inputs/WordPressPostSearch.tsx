@@ -1,11 +1,11 @@
 import React, { useState, useCallback } from 'react';
 import { debounce, DebouncedFunc } from 'lodash';
 import { useQuery } from '@tanstack/react-query';
-import { wordpressApi } from '@/Infrastructure/Wordpress/api';
+import { wordpressApi } from '@/Infrastructure/WordPress/api';
 import { queryKeys } from '@/lib/queryKeyFactory';
 import { TWordPressPost } from '@/Domain/types';
-import { 
-  TextField, 
+import {
+  TextField,
   Typography,
   Card,
   CardContent,
@@ -25,7 +25,7 @@ interface WordPressPostsSearchProps {
   onCancel?: () => void;
 }
 
-const WordPressPostsSearch: React.FC<WordPressPostsSearchProps> = ({ 
+const WordPressPostsSearch: React.FC<WordPressPostsSearchProps> = ({
   onPostSelect,
   onCancel
 }) => {
@@ -75,9 +75,9 @@ const WordPressPostsSearch: React.FC<WordPressPostsSearchProps> = ({
 
   return (
     <Box sx={{ width: '100%', p: 2 }}>
-      <Box sx={{ 
-        display: 'flex', 
-        gap: 2, 
+      <Box sx={{
+        display: 'flex',
+        gap: 2,
         mb: 2,
         alignItems: 'center',
         borderBottom: 1,
@@ -154,24 +154,24 @@ const WordPressPostsSearch: React.FC<WordPressPostsSearchProps> = ({
       ) : error ? (
         <Typography color="error" variant="body2">Error: {error.message}</Typography>
       ) : posts && posts.length > 0 ? (
-        <Box sx={{ 
-          maxHeight: 'calc(100vh - 280px)', 
+        <Box sx={{
+          maxHeight: 'calc(100vh - 280px)',
           overflow: 'auto',
           mx: -2,
           px: 2
         }}>
           {posts.map((post: TWordPressPost) => (
-            <Card 
-              key={post.wordpressId} 
+            <Card
+              key={post.wordpressId}
               variant="outlined"
-              sx={{ 
+              sx={{
                 mb: 1.5,
                 cursor: 'pointer',
                 border: '1px solid',
                 borderColor: 'grey.200',
                 boxShadow: 'none',
                 transition: 'all 0.15s ease-in-out',
-                '&:hover': { 
+                '&:hover': {
                   borderColor: 'grey.300',
                   bgcolor: 'grey.50',
                 }
@@ -182,9 +182,9 @@ const WordPressPostsSearch: React.FC<WordPressPostsSearchProps> = ({
                 image: post.image || '',
               })}
             >
-              <CardContent sx={{ 
-                display: 'flex', 
-                alignItems: 'center', 
+              <CardContent sx={{
+                display: 'flex',
+                alignItems: 'center',
                 p: 1.5,
                 '&:last-child': { pb: 1.5 }
               }}>
@@ -192,17 +192,17 @@ const WordPressPostsSearch: React.FC<WordPressPostsSearchProps> = ({
                   src={post.image}
                   alt={post.title}
                   variant="rounded"
-                  sx={{ 
-                    width: 56, 
-                    height: 56, 
+                  sx={{
+                    width: 56,
+                    height: 56,
                     mr: 1.5,
                     bgcolor: 'grey.100',
                     flexShrink: 0
                   }}
                 />
-                <Typography 
-                  variant="body2" 
-                  sx={{ 
+                <Typography
+                  variant="body2"
+                  sx={{
                     fontWeight: 500,
                     lineHeight: 1.35,
                     display: '-webkit-box',

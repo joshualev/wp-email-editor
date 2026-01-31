@@ -43,8 +43,8 @@ import {
   TDocumentSlice,
 } from '../types';
 import { TEditorBlock, TEditorConfiguration } from '@/Application/components/Editor/editor-core';
-import { wordpressApi } from '@/Infrastructure/Wordpress/api';
-import { TWordPressPostType } from '@/Infrastructure/Wordpress/dto';
+import { wordpressApi } from '@/Infrastructure/WordPress/api';
+import { TWordPressPostType } from '@/Infrastructure/WordPress/dto';
 import { TWordPressPost } from '@/Domain/types';
 
 /*
