@@ -237,6 +237,24 @@ const resizeImageBlock = (
   return block;
 };
 
+/** Resizes any Image/BlogPost blocks within a ColumnsContainer's columns. */
+const resizeImagesInColumnsContainer = (
+  container: TColumnsContainerBlock,
+  document: { [key: string]: TEditorBlock },
+): { [key: string]: TEditorBlock } => {
+  const updatedDocument = { ...document };
+
+  container.data.childrenIds.forEach((column) => {
+    column.forEach((childId) => {
+      const childBlock = updatedDocument[childId];
+      if (!childBlock) return;
+      updatedDocument[childId] = resizeImageBlock(childBlock, childId, updatedDocument);
+    });
+  });
+
+  return updatedDocument;
+};
+
 /** Deletes a block and its descendants from the document. */
 const deleteBlockAndDescendants = (
   document: { [key: string]: TEditorBlock },
@@ -397,11 +415,16 @@ export const createDocumentSlice: StateCreator<
   /** Updates a block's data and resizes images within it if necessary. */
   updateBlock: (blockId, block) => {
     set((state) => {
-      const document = { ...state.document };
+      let document = { ...state.document };
 
-      // Resize images within the block if necessary
-      const resizedBlock = resizeImageBlock(block, blockId, document);
-      document[blockId] = resizedBlock;
+      if (block.type === 'ColumnsContainer') {
+        document[blockId] = block;
+        document = resizeImagesInColumnsContainer(block, document);
+      } else {
+        // Resize images within the block if necessary
+        const resizedBlock = resizeImageBlock(block, blockId, document);
+        document[blockId] = resizedBlock;
+      }
 
       return { ...state, document };
     });

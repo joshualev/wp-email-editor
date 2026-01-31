@@ -43,21 +43,31 @@
 import React from 'react';
 import { z } from 'zod';
 import {
-  ButtonBlock, ButtonBlockPropsSchema,
-  TextBlock, TextBlockPropsSchema,
-  ImageBlock, ImageBlockPropsSchema,
-  HeadingBlock, HeadingBlockPropsSchema,
-  DividerBlock, DividerBlockPropsSchema,
-  BlogPostBlock, BlogPostBlockPropsSchema,
+  BlogPostBlock,
+  ButtonBlock,
+  DividerBlock,
+  HeadingBlock,
+  HubSpotFooterBlock,
+  HubSpotHeaderBlock,
+  ImageBlock,
+  TextBlock,
+} from '@/Application/components/Blocks';
+import {
+  BlogPostBlockPropsSchema,
+  ButtonBlockPropsSchema,
   ColumnsContainerBlockPropsSchema,
+  DividerBlockPropsSchema,
   EmailLayoutBlockPropsSchema,
-  HubSpotHeaderBlock, HubSpotHeaderBlockPropsSchema,
-  HubSpotFooterBlock, HubSpotFooterBlockPropsSchema,
+  HeadingBlockPropsSchema,
+  HubSpotFooterBlockPropsSchema,
+  HubSpotHeaderBlockPropsSchema,
+  ImageBlockPropsSchema,
+  TextBlockPropsSchema,
 } from '@/Domain/Blocks';
 
 import useEditorStore from '@/Application/store/editorStore';
+import { buildBlockComponent } from '@/Application/components/Editor/buildBlockComponent';
 import { buildBlockConfigurationDictionary } from '@/Domain/Document/buildBlockConfigurationDictionary';
-import { buildBlockComponent } from '@/Domain/Document/buildBlockComponent';
 import { buildBlockConfigurationSchema } from '@/Domain/Document/buildBlockConfigurationSchema';
 
 import ColumnsContainerEditor from '@/Application/components/Editor/EditorBlockColumnsContainer/ColumnsContainerEditor';
@@ -73,7 +83,7 @@ import HubSpotBlockWrapper from '@/Application/components/Editor/EditorBlockWrap
 |
 | These wrapper components inject the isMobile prop based on the current
 | screen size selection in the store. This allows blocks to render
-| differently for mobile preview without prop drilling.
+| differently for mobile preview.
 |
 */
 
@@ -116,9 +126,10 @@ function TextBlockWithMobile(props: React.ComponentProps<typeof TextBlock>) {
 | is mapped to its validation schema and rendering component.
 |
 | To add a new block type:
-| 1. Create the block in Domain/Blocks/block-{name}/
-| 2. Export schema and component from Domain/Blocks/index.tsx
-| 3. Add entry here with schema and wrapped Component
+| 1. Create the schema + defaults in Domain/Blocks/block-{name}/
+| 2. Create the render component in Application/components/Blocks
+| 3. Export schema from Domain/Blocks and component from Application/components/Blocks
+| 4. Add entry here with schema and wrapped Component
 |
 */
 

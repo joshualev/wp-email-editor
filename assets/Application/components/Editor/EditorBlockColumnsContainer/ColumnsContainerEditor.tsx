@@ -1,5 +1,6 @@
 import React from 'react';
-import { ColumnsContainerBlock, ColumnsContainerBlockPropsType } from '@/Domain/Blocks/block-columns-container';
+import { ColumnsContainerBlock } from '@/Application/components/Blocks';
+import { ColumnsContainerBlockPropsType } from '@/Domain/Blocks/block-columns-container';
 import { useCurrentBlockId } from '@/Application/components/Editor/EditorBlock';
 import EmptyColumn from './EmptyColumn';
 import EditorBlock from '@/Application/components/Editor/EditorBlock';
@@ -32,4 +33,3 @@ export default function ColumnsContainerEditor(props: EditorProps) {
 
   return <ColumnsContainerBlock {...props} isMobile={isMobile} children={columnContents} />;
 }
-

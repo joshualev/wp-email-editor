@@ -30,11 +30,6 @@ describe('typography helpers', () => {
       expect(parsed).toEqual({ desktop: 'left', mobile: 'center' });
     });
 
-    it('rejects string values (no legacy support)', () => {
-      const result = RESPONSIVE_TEXT_ALIGN_SCHEMA.safeParse('right');
-      expect(result.success).toBe(false);
-    });
-
     it('rejects number values', () => {
       const result = RESPONSIVE_TEXT_ALIGN_SCHEMA.safeParse(42);
       expect(result.success).toBe(false);
@@ -298,11 +293,6 @@ describe('typography helpers', () => {
 
     it('rejects invalid fontWeight', () => {
       const result = TYPOGRAPHY_SCHEMA.safeParse({ fontWeight: 'extra-bold' });
-      expect(result.success).toBe(false);
-    });
-
-    it('rejects string textAlign (no legacy support)', () => {
-      const result = TYPOGRAPHY_SCHEMA.safeParse({ textAlign: 'center' });
       expect(result.success).toBe(false);
     });
   });

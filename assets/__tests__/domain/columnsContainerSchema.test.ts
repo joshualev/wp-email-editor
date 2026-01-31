@@ -5,9 +5,9 @@ import {
   COLUMNS_WIDTHS_SCHEMA,
 } from '@/Domain/Blocks/block-columns-container/schema';
 
+// These constants mirror the schema's internal constraints for test verification
 const TOTAL_WIDTH = 600;
 const MIN_WIDTH = 150;
-const WIDTH_STEP = 50;
 const MAX_COLUMNS = 4;
 
 describe('COLUMNS_WIDTHS_SCHEMA', () => {

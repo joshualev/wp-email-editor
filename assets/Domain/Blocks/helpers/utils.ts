@@ -50,7 +50,7 @@ export function getBorderRadius(type: 'button' | 'image', value: string | number
       case 'large':
         return 16;
       case 'full':
-        return '50%'; // Changed from 'circle' to 'full'
+        return '50%';
       default:
         return 0;
     }

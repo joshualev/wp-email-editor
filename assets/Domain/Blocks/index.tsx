@@ -1,75 +1,58 @@
 /**
- * Domain/Blocks/index.tsx - Block Components Export Hub
+ * Domain/Blocks/index.tsx - Block Schemas Export Hub
  *
- * Central export file for all email block components and their schemas.
+ * Central export file for all email block schemas, types, and defaults.
+ * React render components now live in Application/components/Blocks.
+ *
  * Each block type is self-contained in its own folder with:
- * - index.tsx: React component implementation
- * - schema.ts: Zod validation schema and TypeScript types
+ * - index.tsx: Zod schema exports, types, and defaults
+ * - schema.ts: Zod validation schema definitions
  *
  * Block Categories:
  * -----------------
  *
  * Content Blocks (user-placeable):
- * - Button: Call-to-action links
- * - Text: Rich text content
- * - Image: Responsive images
- * - Heading: H1-H6 typography
- * - Divider: Visual separators
- * - BlogPost: WordPress post embed
+ * - Button, Text, Image, Heading, Divider, BlogPost
  *
  * Layout Blocks (structural):
- * - EmailLayout: Root container (one per document)
- * - ColumnsContainer: Row with 1-4 columns
+ * - EmailLayout, ColumnsContainer
  *
  * HubSpot Blocks (required for email delivery):
- * - HubSpotHeader: Email preheader and browser link
- * - HubSpotFooter: Unsubscribe and company info
- *
- * Naming Convention:
- * ------------------
- * Each block exports:
- * - {Name}Block: React component
- * - {Name}BlockSchema: Zod schema for storage format
- * - {Name}BlockPropsSchema: Zod schema for component props
- * - {Name}BlockType: TypeScript type (inferred from schema)
- * - {Name}BlockPropsType: TypeScript props type
+ * - HubSpotHeader, HubSpotFooter
  *
  * @module Domain/Blocks
  */
 
 // Content Blocks
-export { ButtonBlockSchema, ButtonBlock, type ButtonBlockType, ButtonBlockPropsSchema, type ButtonBlockPropsType } from './block-button';
-export { TextBlockSchema, TextBlock, type TextBlockType, TextBlockPropsSchema, type TextBlockPropsType } from './block-text';
-export { ImageBlockSchema, ImageBlock, type ImageBlockType, ImageBlockPropsSchema, type ImageBlockPropsType } from './block-image';
-export { HeadingBlockSchema, HeadingBlock, type HeadingBlockType, HeadingBlockPropsSchema, type HeadingBlockPropsType } from './block-heading';
-export { DividerBlockSchema, DividerBlock, type DividerBlockType, DividerBlockPropsSchema, type DividerBlockPropsType } from './block-divider';
-export { BlogPostBlockSchema, BlogPostBlock, type BlogPostBlockType, BlogPostBlockPropsSchema, type BlogPostBlockPropsType } from './block-post';
+export { ButtonBlockSchema, type ButtonBlockType, ButtonBlockPropsSchema, type ButtonBlockPropsType, ButtonBlockPropsDefaults } from './block-button';
+export { TextBlockSchema, type TextBlockType, TextBlockPropsSchema, type TextBlockPropsType, TextBlockPropsDefaults } from './block-text';
+export { ImageBlockSchema, type ImageBlockType, ImageBlockPropsSchema, type ImageBlockPropsType, ImageBlockPropsDefaults } from './block-image';
+export { HeadingBlockSchema, type HeadingBlockType, HeadingBlockPropsSchema, type HeadingBlockPropsType, HeadingBlockPropsDefaults } from './block-heading';
+export { DividerBlockSchema, type DividerBlockType, DividerBlockPropsSchema, type DividerBlockPropsType, DividerBlockPropsDefaults } from './block-divider';
+export { BlogPostBlockSchema, type BlogPostBlockType, BlogPostBlockPropsSchema, type BlogPostBlockPropsType, BlogPostBlockPropsDefaults } from './block-post';
 
 // HubSpot Integration Blocks
 export {
-    HubSpotHeaderBlockSchema,
-    HubSpotHeaderBlock,
-    type HubSpotHeaderBlockType,
-    HubSpotHeaderBlockPropsSchema,
-    type HubSpotHeaderBlockPropsType
+  HubSpotHeaderBlockSchema,
+  type HubSpotHeaderBlockType,
+  HubSpotHeaderBlockPropsSchema,
+  type HubSpotHeaderBlockPropsType,
 } from './block-hubspot-header';
 export {
-    HubSpotFooterBlockSchema,
-    HubSpotFooterBlock,
-    type HubSpotFooterBlockType,
-    HubSpotFooterBlockPropsSchema,
-    type HubSpotFooterBlockPropsType
+  HubSpotFooterBlockSchema,
+  type HubSpotFooterBlockType,
+  HubSpotFooterBlockPropsSchema,
+  type HubSpotFooterBlockPropsType,
 } from './block-hubspot-footer';
 
 // Layout Blocks
 export {
-    ColumnsContainerBlock,
-    ColumnsContainerBlockSchema,
-    type ColumnsContainerBlockType,
-    ColumnsContainerBlockPropsSchema,
-    type ColumnsContainerBlockPropsType
+  ColumnsContainerBlockSchema,
+  type ColumnsContainerBlockType,
+  ColumnsContainerBlockPropsSchema,
+  type ColumnsContainerBlockPropsType,
 } from './block-columns-container';
 export {
-    EmailLayoutBlockPropsSchema,
-    type EmailLayoutBlockPropsType
+  EmailLayoutBlockPropsSchema,
+  type EmailLayoutBlockPropsType,
 } from '@/Domain/Blocks/block-email-layout/schema';

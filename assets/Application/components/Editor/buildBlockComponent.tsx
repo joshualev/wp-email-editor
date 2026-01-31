@@ -4,18 +4,7 @@
  * Creates a React component that can render any registered block type.
  * This is the runtime component resolution mechanism that powers the editor.
  *
- * How It Works:
- * -------------
- * 1. Receives a block configuration { type: "Text", data: { text: "Hello" } }
- * 2. Looks up the corresponding Component in the registry
- * 3. Renders the Component with the block's data as props
- *
- * This pattern allows:
- * - Adding new block types without modifying rendering logic
- * - Type-safe prop passing (props match schema)
- * - Consistent block rendering across the application
- *
- * @module Domain/Document
+ * @module Application/components/Editor
  */
 import React from 'react';
 import { BaseZodDictionary, BlockConfiguration, DocumentBlocksDictionary } from '@/Domain/Document/utils';
