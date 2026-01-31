@@ -1,11 +1,14 @@
 import { z } from 'zod';
-import { ALIGNMENT_SCHEMA, LAYOUT_SCHEMA } from '../helpers/layout';
+import { LAYOUT_SCHEMA } from '../helpers/layout';
 
 // Constants for column width constraints
 const TOTAL_WIDTH = 600;
 const MIN_WIDTH = 150;
 const WIDTH_STEP = 50;
 const MAX_COLUMNS = 4;
+
+// Vertical alignment values for content within columns
+const VERTICAL_ALIGN_VALUES = ['top', 'middle', 'baseline'] as const;
 
 // Schema for column widths with validation rules
 export const COLUMNS_WIDTHS_SCHEMA = z
@@ -24,21 +27,6 @@ export const COLUMNS_WIDTHS_SCHEMA = z
     }
   );
 
-
-  //   // Check if columns are evenly distributed or need adjustment
-  //   const allActiveWidthsEqual = widths.every((w) => w === widths[0]);
-
-  //   if (widths.length > 1 && allActiveWidthsEqual) {
-  //     const equalWidth = Math.floor(TOTAL_WIDTH / widths.length / WIDTH_STEP) * WIDTH_STEP;
-  //     return {
-  //       ...data,
-  //       fixedWidths: Array(widths.length).fill(equalWidth),
-  //     };
-  //   }
-
-  //   return data;
-  // });
-
 // Complete schema for the Columns Container block
 export const COLUMNS_CONTAINER_SCHEMA = z.object({
   type: z.literal('ColumnsContainer'),
@@ -49,7 +37,7 @@ export const COLUMNS_CONTAINER_SCHEMA = z.object({
       .array(z.array(z.string()))
       .length(MAX_COLUMNS)
       .default([...Array(MAX_COLUMNS)].map(() => [])),
-    contentAlignment: ALIGNMENT_SCHEMA.shape.vertical,
+    contentAlignment: z.enum(VERTICAL_ALIGN_VALUES).default('middle'),
     layout: LAYOUT_SCHEMA
   }),
 });

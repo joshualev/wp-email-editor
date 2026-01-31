@@ -10,10 +10,6 @@
  * - LAYOUT_SCHEMA: Combined padding + background
  * - ALIGNMENT_SCHEMA: Vertical + responsive horizontal alignment
  *
- * Responsive Design:
- * RESPONSIVE_HORIZONTAL_ALIGN_SCHEMA supports separate desktop/mobile
- * values with automatic migration from legacy single-value strings.
- *
  * Key Exports:
  * - LAYOUT_SCHEMA: Standard layout config for blocks
  * - getResponsiveAlignment(): Returns alignment based on viewport
@@ -43,33 +39,18 @@ export const LAYOUT_SCHEMA = z.object({
 export const HORIZONTAL_ALIGN_VALUES = ['left', 'center', 'right'] as const;
 export type HorizontalAlignValue = typeof HORIZONTAL_ALIGN_VALUES[number];
 
-// Responsive alignment - supports desktop/mobile values
-// Uses preprocess to handle legacy string values for backward compatibility
-export const RESPONSIVE_HORIZONTAL_ALIGN_SCHEMA = z.preprocess(
-  (val) => {
-    // If it's already an object, use it as-is
-    if (typeof val === 'object' && val !== null) {
-      return val;
-    }
-    // If it's a legacy string value, convert to responsive object
-    if (typeof val === 'string' && HORIZONTAL_ALIGN_VALUES.includes(val as HorizontalAlignValue)) {
-      return { desktop: val, mobile: 'center' };
-    }
-    // Default fallback
-    return { desktop: 'left', mobile: 'center' };
-  },
-  z.object({
-    desktop: z.enum(HORIZONTAL_ALIGN_VALUES).default('left'),
-    mobile: z.enum(HORIZONTAL_ALIGN_VALUES).default('center'),
-  })
-);
+// Responsive horizontal alignment - supports separate desktop/mobile values
+export const RESPONSIVE_HORIZONTAL_ALIGN_SCHEMA = z.object({
+  desktop: z.enum(HORIZONTAL_ALIGN_VALUES).default('left'),
+  mobile: z.enum(HORIZONTAL_ALIGN_VALUES).default('center'),
+}).default({ desktop: 'left', mobile: 'center' });
 export type ResponsiveHorizontalAlignValue = z.infer<typeof RESPONSIVE_HORIZONTAL_ALIGN_SCHEMA>;
 
-// Legacy alignment schema (for backward compatibility)
+// Alignment schema for blocks that need both vertical and horizontal positioning
 export const ALIGNMENT_SCHEMA = z.object({
   vertical: z.enum(['top', 'middle', 'baseline']).default('middle'),
   horizontal: RESPONSIVE_HORIZONTAL_ALIGN_SCHEMA,
-});
+}).default({ vertical: 'middle', horizontal: { desktop: 'left', mobile: 'center' } });
 export type AlignmentValue = z.infer<typeof ALIGNMENT_SCHEMA>;
 
 // Helper to get alignment based on screen size

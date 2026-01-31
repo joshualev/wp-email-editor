@@ -9,8 +9,7 @@
  * - HEADING_SIZE_VALUES: xs(16) through xxl(36) for headings
  *
  * Responsive Alignment:
- * The RESPONSIVE_TEXT_ALIGN_SCHEMA supports desktop/mobile values with
- * automatic migration from legacy single-value strings.
+ * RESPONSIVE_TEXT_ALIGN_SCHEMA supports separate desktop/mobile values.
  *
  * Key Exports:
  * - TYPOGRAPHY_SCHEMA: Combined schema for all typography options
@@ -64,34 +63,11 @@ export const FONT_WEIGHT_SCHEMA = z.enum([
 ]).default('normal');
 export type FontWeightValue = z.infer<typeof FONT_WEIGHT_SCHEMA>;
 
-// Legacy single-value text align (for backward compatibility)
-export const TEXT_ALIGN_SCHEMA = z.enum([
-  'left',
-  'center',
-  'right'
-]).default('left');
-export type TextAlignValue = z.infer<typeof TEXT_ALIGN_SCHEMA>;
-
-// Responsive text alignment - supports desktop/mobile values
-// Uses preprocess to handle legacy string values for backward compatibility
-export const RESPONSIVE_TEXT_ALIGN_SCHEMA = z.preprocess(
-  (val) => {
-    // If it's already an object, use it as-is
-    if (typeof val === 'object' && val !== null) {
-      return val;
-    }
-    // If it's a legacy string value, convert to responsive object
-    if (typeof val === 'string' && HORIZONTAL_ALIGN_VALUES.includes(val as HorizontalAlignValue)) {
-      return { desktop: val, mobile: 'center' };
-    }
-    // Default fallback
-    return { desktop: 'left', mobile: 'center' };
-  },
-  z.object({
-    desktop: z.enum(HORIZONTAL_ALIGN_VALUES).default('left'),
-    mobile: z.enum(HORIZONTAL_ALIGN_VALUES).default('center'),
-  })
-);
+// Responsive text alignment - supports separate desktop/mobile values
+export const RESPONSIVE_TEXT_ALIGN_SCHEMA = z.object({
+  desktop: z.enum(HORIZONTAL_ALIGN_VALUES).default('left'),
+  mobile: z.enum(HORIZONTAL_ALIGN_VALUES).default('center'),
+}).default({ desktop: 'left', mobile: 'center' });
 export type ResponsiveTextAlignValue = z.infer<typeof RESPONSIVE_TEXT_ALIGN_SCHEMA>;
 
 // Helper to get text alignment based on screen size
