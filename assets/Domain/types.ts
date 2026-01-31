@@ -51,18 +51,19 @@ export type TEditorConfiguration = z.infer<typeof EditorConfigurationSchema>;
 |
 */
 
-/** Supported WordPress post types for blog blocks */
-export const WordPressPostTypeEnum = z.enum([
-  'post',           // Standard blog posts
-  'whats-hot',      // Featured/trending content
-  'sponsored_content', // Sponsored articles
-  'tribe_events'    // Events (The Events Calendar plugin)
-]);
+/**
+ * WordPress post type identifier.
+ *
+ * We intentionally allow any non-empty string here because available post types
+ * are discovered at runtime from the WordPress REST API. Validation of allowed
+ * types should happen in the API/refiner layer, not the Domain schema.
+ */
+export const WordPressPostTypeSchema = z.string().min(1);
 
 /** WordPress post data schema */
 export const WordPressPostSchema = z.object({
   wordpressId: z.string(),
-  postType: z.string(),
+  postType: WordPressPostTypeSchema,
   permalink: z.string(),
   image: z.string().optional(),
   title: z.string().optional(),
@@ -73,7 +74,7 @@ export const WordPressPostSchema = z.object({
   event_end_date: z.string().optional()
 });
 
-export type TWordPressPostType = z.infer<typeof WordPressPostTypeEnum>;
+export type TWordPressPostType = z.infer<typeof WordPressPostTypeSchema>;
 export type TWordPressPost = z.infer<typeof WordPressPostSchema>;
 
 /*

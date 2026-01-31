@@ -74,10 +74,15 @@ describe('documentSlice.updateBlock', () => {
     const document = createDocument();
     const useStore = createStore(document);
 
+    const row = document['row-1'];
+    if (row.type !== 'ColumnsContainer') {
+      throw new Error('Expected row-1 to be ColumnsContainer');
+    }
+
     const updatedRow = {
-      ...document['row-1'],
+      ...row,
       data: {
-        ...document['row-1'].data,
+        ...row.data,
         widths: [400, 200],
       },
     };
