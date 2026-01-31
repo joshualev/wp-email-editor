@@ -29,6 +29,7 @@ import { useMutation } from '@tanstack/react-query';
 
 export default function SaveNewsletter() {
   const document = useEditorStore((state) => state.document);
+  const isHubSpotConfigured = useEditorStore((state) => state.isHubSpotConfigured);
 
   const validateBlogPosts = () => {
     const blogPosts = Object.values(document).filter((block) => block.type === 'BlogPost');
@@ -37,7 +38,7 @@ export default function SaveNewsletter() {
       if (!post.data.wordpressId || !post.data.postType) {
         return {
           isValid: false,
-          error: `Invalid blog post configuration: Missing ${!post.data.wordpressId ? 'wordpressId' : 'postType'}`
+          error: `Invalid blog post configuration: Missing ${!post.data.wordpressId ? ' wordpressId' : ' postType'}`
         };
       }
     }
@@ -67,9 +68,17 @@ export default function SaveNewsletter() {
   }, [document, mutate]);
 
   return (
-    <Tooltip title={isPending ? 'Saving...' : 'Save Newsletter'}>
+    <Tooltip
+      title={
+        isPending
+          ? 'Saving...'
+          : isHubSpotConfigured
+            ? 'Save Newsletter'
+            : 'Connect HubSpot HubDB to enable saving'
+      }
+    >
       <span>
-        <IconButton onClick={handleSave} disabled={isPending}>
+        <IconButton onClick={handleSave} disabled={isPending || !isHubSpotConfigured}>
           <SaveOutlined fontSize="small" />
         </IconButton>
       </span>

@@ -79,7 +79,7 @@ export type TBlogPostBlock = Extract<TEditorBlock, { type: 'BlogPost' }>;
 |
 */
 
-const EMPTY_DOCUMENT: TEditorConfiguration = {
+export const EMPTY_DOCUMENT: TEditorConfiguration = {
   root: {
     type: 'EmailLayout',
     data: {

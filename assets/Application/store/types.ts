@@ -176,6 +176,9 @@ export interface TUISlice {
   /** Whether a block is currently being dragged */
   isBlockBeingDragged: boolean;
 
+  /** Whether HubSpot HubDB is configured (controls save availability) */
+  isHubSpotConfigured: boolean;
+
   /** Select a block and update related UI state */
   setSelectedBlockId: (selectedBlockId: string | null) => void;
 
@@ -190,6 +193,9 @@ export interface TUISlice {
 
   /** Set the drag state (used for drop zone styling) */
   setBlockDraggingState: (isDragging: boolean) => void;
+
+  /** Set HubSpot configuration status */
+  setHubSpotConfigured: (isConfigured: boolean) => void;
 }
 
 /**

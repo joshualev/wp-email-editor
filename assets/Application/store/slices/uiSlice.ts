@@ -37,6 +37,7 @@ export const createUISlice: StateCreator<TEditorStore, [], [], TUISlice> = (set,
   selectedScreenSize: 'desktop',
   isInspectorDrawerOpen: true,
   isBlockBeingDragged: false,
+  isHubSpotConfigured: false,
 
   /**
    * Sets the selected block ID and updates related UI states.
@@ -96,4 +97,9 @@ export const createUISlice: StateCreator<TEditorStore, [], [], TUISlice> = (set,
    * @param isDragging - Whether a block is currently being dragged
    */
   setBlockDraggingState: (isDragging: boolean) => set({ isBlockBeingDragged: isDragging }),
+
+  /**
+   * Sets whether HubSpot HubDB is configured (controls save availability).
+   */
+  setHubSpotConfigured: (isConfigured: boolean) => set({ isHubSpotConfigured: isConfigured }),
 });

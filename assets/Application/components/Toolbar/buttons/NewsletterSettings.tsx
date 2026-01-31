@@ -34,6 +34,7 @@ import { Settings as SettingsIcon } from '@mui/icons-material';
 import { useMutation } from '@tanstack/react-query';
 import { newsletterApi } from '@/Infrastructure/Newsletter/api';
 import TextInput from '@/Application/components/InspectorDrawer/forms/inputs/TextInput';
+import useEditorStore from '@/Application/store/editorStore';
 
 const modalStyle = {
   position: 'absolute',
@@ -57,6 +58,7 @@ export default function Settings() {
   const [activeStep, setActiveStep] = useState(0);
   const [apiKey, setApiKey] = useState('');
   const [tableName, setTableName] = useState('');
+  const setHubSpotConfigured = useEditorStore((state) => state.setHubSpotConfigured);
 
   const verifyApiKeyMutation = useMutation({
     mutationFn: async (key: string) => {
@@ -91,6 +93,7 @@ export default function Settings() {
   const handleCreateTable = async () => {
     try {
       await createTableMutation.mutateAsync({ name: tableName, label: tableName });
+      setHubSpotConfigured(true);
       setOpen(false);
       setActiveStep(0);
       // Show success message

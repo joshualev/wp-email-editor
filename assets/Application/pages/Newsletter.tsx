@@ -32,7 +32,8 @@ import { useQuery } from '@tanstack/react-query';
 import { queryKeys } from '@/lib/queryKeyFactory';
 import { newsletterApi } from '@/Infrastructure/Newsletter/api';
 import useEditorStore from '@/Application/store/editorStore';
-import { EditorConfigurationSchema } from '@/Application/components/Editor/editor-core';
+import { EMPTY_DOCUMENT } from '@/Application/store/slices/documentSlice';
+import { normalizeNewsletterData } from '@/Application/utils/newsletterData';
 
 import { Box, Stack, useTheme, CircularProgress } from '@mui/material';
 import InspectorDrawer, { INSPECTOR_DRAWER_WIDTH } from '@/Application/components/InspectorDrawer';
@@ -67,26 +68,39 @@ export default function Newsletter() {
   // Access the inspectorDrawerOpen state from uiSlice
   const isInspectorDrawerOpen = useEditorStore((state) => state.isInspectorDrawerOpen);
   const resetDocument = useEditorStore((state) => state.resetDocument);
+  const setHubSpotConfigured = useEditorStore((state) => state.setHubSpotConfigured);
 
   const marginRightTransition = useDrawerTransition('margin-right', isInspectorDrawerOpen);
 
-  const { data, isPending, isSuccess, isError, error } = useQuery({
+  const { data, isPending, isError } = useQuery({
     queryKey: queryKeys.newsletter.fetch,
     queryFn: () => newsletterApi.fetchNewsletter(),
     retry: false,
   });
 
-  // Reset document only once when data is initially fetched
   React.useEffect(() => {
-    if (data) {
-      const parseResult = EditorConfigurationSchema.safeParse(data);
-      if (parseResult.success) {
-        resetDocument(parseResult.data);
-      } else {
-        console.error('Invalid newsletter data:', parseResult.error);
-      }
+    if (isPending) return;
+
+    if (isError) {
+      setHubSpotConfigured(false);
+      resetDocument(EMPTY_DOCUMENT);
+      return;
     }
-  }, [data, resetDocument]);
+
+    const { document, status } = normalizeNewsletterData(data, EMPTY_DOCUMENT);
+
+    if (status === 'unconfigured') {
+      setHubSpotConfigured(false);
+    } else {
+      setHubSpotConfigured(true);
+    }
+
+    if (status === 'invalid') {
+      console.warn('Invalid newsletter data. Falling back to an empty document.');
+    }
+
+    resetDocument(document);
+  }, [data, isError, isPending, resetDocument, setHubSpotConfigured]);
 
   if (isPending) {
     return (
@@ -98,17 +112,7 @@ export default function Newsletter() {
     );
   }
 
-  if (isError) {
-    return (
-      <Box
-        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}
-      >
-        <div>Error: {error.message}</div>
-      </Box>
-    );
-  }
-
-  if (isSuccess) {
+  if (!isPending) {
     return (
       <>
         <InspectorDrawer />
@@ -125,5 +129,5 @@ export default function Newsletter() {
     );
   }
 
-  return null; // Fallback
+  return null;
 }

@@ -35,6 +35,7 @@ import { Box, SxProps } from '@mui/material';
 import useEditorStore from '../../store/editorStore';
 import EditorBlock from '@/Application/components/Editor/EditorBlock';
 import Toolbar from '../Toolbar';
+import HubSpotSetupBanner from '@/Application/components/Setup/HubSpotSetupBanner';
 
 /** Edge type for drop positioning */
 type Edge = 'top' | 'bottom';
@@ -129,6 +130,7 @@ export default function Editor() {
   return (
     <>
       <Toolbar />
+      <HubSpotSetupBanner />
       <Box sx={{ height: 'calc(100vh - 81px)', overflow: 'auto', minWidth: 370 }}>
         <Box sx={mainBoxSx}>
           <EditorBlock id="root" />
