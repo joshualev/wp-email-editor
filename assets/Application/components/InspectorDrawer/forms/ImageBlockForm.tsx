@@ -77,7 +77,6 @@ export default function ImageBlockForm({ data, setData }: ImageBlockFormProps) {
       <TextDimensionInput
         label="Width"
         defaultValue={data.image.width}
-        max={600}
         onChange={(width) =>
           updateData({
             image: { ...data.image, width: width ?? data.image.width },

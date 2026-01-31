@@ -76,6 +76,22 @@ export default function SaveNewsletter() {
             ? 'Save Newsletter'
             : 'Connect HubSpot HubDB to enable saving'
       }
+      placement="bottom"
+      PopperProps={{
+        modifiers: [
+          {
+            name: 'preventOverflow',
+            options: { boundary: 'viewport', padding: 8, altAxis: true },
+          },
+          {
+            name: 'flip',
+            options: { boundary: 'viewport', padding: 8, altBoundary: true },
+          },
+        ],
+      }}
+      componentsProps={{
+        tooltip: { sx: { maxWidth: 220, whiteSpace: 'normal' } },
+      }}
     >
       <span>
         <IconButton onClick={handleSave} disabled={isPending || !isHubSpotConfigured}>

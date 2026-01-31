@@ -23,6 +23,8 @@ export function HeadingBlock({ content, headingType, typography, layout, isMobil
     fontFamily: getFontFamily(typography.fontFamily),
     fontWeight: typography.fontWeight,
     textAlign,
+    overflowWrap: 'anywhere',
+    wordBreak: 'break-word',
     margin: 0,
   };
 

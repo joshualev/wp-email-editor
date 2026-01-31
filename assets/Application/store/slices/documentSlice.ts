@@ -172,6 +172,8 @@ const resizeImageBlock = (
 ): TEditorBlock => {
   if (block.type !== 'BlogPost' && block.type !== 'Image') return block;
 
+  const MIN_IMAGE_WIDTH = 50;
+
   // Find the ColumnsContainer and column index
   const parentInfo = getParentBlockInfo(document, blockId);
   if (parentInfo && parentInfo.parentBlock.type === 'ColumnsContainer') {
@@ -186,13 +188,23 @@ const resizeImageBlock = (
         const { padding } = block.data.layout;
         const imagePadding = padding.left + padding.right;
         const maxWidth = columnWidth - imagePadding;
+        const currentWidth = block.data.image.width;
+        const nextWidth = Math.max(
+          MIN_IMAGE_WIDTH,
+          Math.min(currentWidth, maxWidth)
+        );
+
+        if (nextWidth === currentWidth) {
+          return block;
+        }
 
         return {
           ...block,
           data: {
-            ...block.data, image: {
+            ...block.data,
+            image: {
               ...block.data.image,
-              width: maxWidth,
+              width: nextWidth,
             },
           },
         };
@@ -206,6 +218,15 @@ const resizeImageBlock = (
           const { padding } = image.data.layout;
           const imagePadding = padding.left + padding.right;
           const maxWidth = columnWidth - imagePadding;
+          const currentWidth = image.data.image.width;
+          const nextWidth = Math.max(
+            MIN_IMAGE_WIDTH,
+            Math.min(currentWidth, maxWidth)
+          );
+
+          if (nextWidth === currentWidth) {
+            return block;
+          }
 
           const resizedImage: TImageBlock = {
             ...image,
@@ -213,7 +234,7 @@ const resizeImageBlock = (
               ...image.data,
               image: {
                 ...image.data.image,
-                width: maxWidth,
+                width: nextWidth,
               },
             },
           };

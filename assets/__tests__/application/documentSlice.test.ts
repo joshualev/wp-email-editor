@@ -28,7 +28,10 @@ const createImageBlock = (width = 300, padding = ImageBlockPropsDefaults.layout.
   },
 });
 
-const createBlogPostBlock = (imagePadding = ImageBlockPropsDefaults.layout.padding) => {
+const createBlogPostBlock = (
+  imagePadding = ImageBlockPropsDefaults.layout.padding,
+  imageWidth = ImageBlockPropsDefaults.image.width
+) => {
   const components = BlogPostBlockPropsDefaults.components.map((component) => {
     if (component.type !== 'Image') {
       return {
@@ -43,6 +46,10 @@ const createBlogPostBlock = (imagePadding = ImageBlockPropsDefaults.layout.paddi
       ...component,
       data: {
         ...component.data,
+        image: {
+          ...component.data.image,
+          width: imageWidth,
+        },
         layout: {
           ...component.data.layout,
           padding: imagePadding,
@@ -83,8 +90,8 @@ const createDocument = (): TEditorConfiguration => {
         layout: baseLayout,
       },
     },
-    'image-1': createImageBlock(300),
-    'blog-1': createBlogPostBlock(),
+    'image-1': createImageBlock(500),
+    'blog-1': createBlogPostBlock(ImageBlockPropsDefaults.layout.padding, 520),
   };
 };
 
@@ -162,7 +169,7 @@ const createStore = (document: TEditorConfiguration) => {
 };
 
 describe('documentSlice.updateBlock', () => {
-  it('resizes image and blog post images when columns are resized', () => {
+  it('shrinks image and blog post images when columns become narrower', () => {
     const document = createDocument();
     const useStore = createStore(document);
 
@@ -175,7 +182,7 @@ describe('documentSlice.updateBlock', () => {
       ...row,
       data: {
         ...row.data,
-        widths: [400, 200],
+        widths: [200, 400],
       },
     };
 
@@ -186,7 +193,7 @@ describe('documentSlice.updateBlock', () => {
 
     if (updatedImage.type === 'Image') {
       const padding = ImageBlockPropsDefaults.layout.padding.left + ImageBlockPropsDefaults.layout.padding.right;
-      expect(updatedImage.data.image.width).toBe(400 - padding);
+      expect(updatedImage.data.image.width).toBe(200 - padding);
     }
 
     const updatedBlogPost = useStore.getState().document['blog-1'];
@@ -198,8 +205,37 @@ describe('documentSlice.updateBlock', () => {
 
       if (imageComponent && imageComponent.type === 'Image') {
         const padding = ImageBlockPropsDefaults.layout.padding.left + ImageBlockPropsDefaults.layout.padding.right;
-        expect(imageComponent.data.image.width).toBe(400 - padding);
+        expect(imageComponent.data.image.width).toBe(200 - padding);
       }
+    }
+  });
+
+  it('does not grow images when columns become wider', () => {
+    const document = createDocument();
+
+    const imageBlock = document['image-1'];
+    if (imageBlock.type === 'Image') {
+      imageBlock.data.image.width = 200;
+    }
+
+    const useStore = createStore(document);
+
+    const row = document['row-1'];
+    if (row.type !== 'ColumnsContainer') {
+      throw new Error('Expected row-1 to be ColumnsContainer');
+    }
+
+    useStore.getState().updateBlock('row-1', {
+      ...row,
+      data: {
+        ...row.data,
+        widths: [500, 100],
+      },
+    });
+
+    const updatedImage = useStore.getState().document['image-1'];
+    if (updatedImage.type === 'Image') {
+      expect(updatedImage.data.image.width).toBe(200);
     }
   });
 
@@ -273,7 +309,7 @@ describe('documentSlice.updateBlock', () => {
           layout: baseLayout,
         },
       },
-      'blog-1': createBlogPostBlock(imagePadding),
+      'blog-1': createBlogPostBlock(imagePadding, 500),
     };
 
     const useStore = createStore(document);
@@ -286,7 +322,7 @@ describe('documentSlice.updateBlock', () => {
       ...row,
       data: {
         ...row.data,
-        widths: [450, 150],
+        widths: [250, 350],
       },
     };
 
@@ -297,7 +333,7 @@ describe('documentSlice.updateBlock', () => {
       const imageComponent = updatedBlogPost.data.components.find((component) => component.type === 'Image');
       if (imageComponent && imageComponent.type === 'Image') {
         const padding = imagePadding.left + imagePadding.right;
-        expect(imageComponent.data.image.width).toBe(450 - padding);
+        expect(imageComponent.data.image.width).toBe(250 - padding);
       }
     }
   });

@@ -3,12 +3,10 @@ import {
   Alert,
   AlertTitle,
   Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
+  Collapse,
   List,
   ListItem,
+  Paper,
   Stack,
   Typography,
 } from '@mui/material';
@@ -25,11 +23,21 @@ export default function HubSpotSetupBanner() {
     <>
       <Alert
         severity="info"
-        sx={{ mx: 2, mt: 2, mb: 1 }}
+        sx={{ mx: 2, mt: 2, mb: 1, alignItems: 'flex-start' }}
         action={
-          <Button color="inherit" size="small" onClick={() => setIsGuideOpen(true)}>
-            View setup guide
-          </Button>
+          <Stack
+            alignItems="flex-end"
+            sx={{ minWidth: 120, maxWidth: 150 }}
+          >
+            <Button
+              color="inherit"
+              size="small"
+              onClick={() => setIsGuideOpen((prev) => !prev)}
+              sx={{ textAlign: 'right', whiteSpace: 'normal', lineHeight: 1.2 }}
+            >
+              {isGuideOpen ? 'Hide setup guide' : 'View setup guide'}
+            </Button>
+          </Stack>
         }
       >
         <AlertTitle>Saving is disabled</AlertTitle>
@@ -37,10 +45,10 @@ export default function HubSpotSetupBanner() {
         Use the settings (gear icon) to connect your account.
       </Alert>
 
-      <Dialog open={isGuideOpen} onClose={() => setIsGuideOpen(false)} maxWidth="md" fullWidth>
-        <DialogTitle>HubSpot HubDB setup guide</DialogTitle>
-        <DialogContent>
+      <Collapse in={isGuideOpen}>
+        <Paper variant="outlined" sx={{ mx: 2, mb: 2, p: 3 }}>
           <Stack spacing={2}>
+            <Typography variant="h6">HubSpot HubDB setup guide</Typography>
             <Typography variant="body2" color="text.secondary">
               Follow these steps to connect HubSpot and enable saving from the editor.
             </Typography>
@@ -70,11 +78,8 @@ export default function HubSpotSetupBanner() {
               Tip: You can edit newsletters without connecting HubSpot, but saving requires a configured table.
             </Typography>
           </Stack>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setIsGuideOpen(false)}>Close</Button>
-        </DialogActions>
-      </Dialog>
+        </Paper>
+      </Collapse>
     </>
   );
 }
