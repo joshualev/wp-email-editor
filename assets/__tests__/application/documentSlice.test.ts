@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { create } from 'zustand';
 
-import { createDocumentSlice } from '@/Application/store/slices/documentSlice';
-import { createUISlice } from '@/Application/store/slices/uiSlice';
-import type { TEditorStore } from '@/Application/store/types';
-import type { TEditorConfiguration } from '@/Application/components/Editor/editor-core';
-import { ImageBlockPropsDefaults } from '@/Domain/Blocks/block-image';
-import { BlogPostBlockPropsDefaults } from '@/Domain/Blocks/block-post';
+import { createDocumentSlice } from '@/application/store/slices/documentSlice';
+import { createUISlice } from '@/application/store/slices/uiSlice';
+import type { TEditorStore } from '@/application/store/types';
+import type { TEditorConfiguration } from '@/application/components/editor/editor-core';
+import { ImageBlockPropsDefaults } from '@/domain/blocks/block-image';
+import { BlogPostBlockPropsDefaults } from '@/domain/blocks/block-post';
 
 const baseLayout = {
   padding: { top: 0, right: 0, bottom: 0, left: 0 },

@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   COLUMNS_CONTAINER_SCHEMA,
   COLUMNS_WIDTHS_SCHEMA,
-} from '@/Domain/Blocks/block-columns-container/schema';
+} from '@/domain/blocks/block-columns-container/schema';
 
 // These constants mirror the schema's internal constraints for test verification
 const TOTAL_WIDTH = 600;

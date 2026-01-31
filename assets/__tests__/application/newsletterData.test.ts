@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { normalizeNewsletterData } from '@/Application/utils/newsletterData';
-import { EMPTY_DOCUMENT } from '@/Application/store/slices/documentSlice';
+import { normalizeNewsletterData } from '@/application/utils/newsletterData';
+import { EMPTY_DOCUMENT } from '@/application/store/slices/documentSlice';
 
 const fallback = EMPTY_DOCUMENT;
 

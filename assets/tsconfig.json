@@ -27,12 +27,10 @@
   },
   "include": [
     "__tests__",
-    "Application",
-    "Domain",
-    "Infrastructure",
-    "utils",
-    "lib/queryKeyFactory.ts",
-    "Application/store"
+    "application",
+    "domain",
+    "infrastructure",
+    "lib"
   ],
   "exclude": [
     "node_modules"

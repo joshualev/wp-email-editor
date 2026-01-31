@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 let capturedBaseUrl: string | null = null;
 const requestMock = vi.fn();
 
-vi.mock('@/Infrastructure/client', () => ({
+vi.mock('@/infrastructure/client', () => ({
   createApiClient: (baseUrl: string) => {
     capturedBaseUrl = baseUrl;
     return { request: requestMock };
@@ -20,7 +20,7 @@ describe('newsletterApi', () => {
   it('uses the wp-hubspot-edm-editor namespace and correct fetch path', async () => {
     requestMock.mockResolvedValueOnce({ data: {} });
 
-    const { newsletterApi } = await import('@/Infrastructure/Newsletter/api');
+    const { newsletterApi } = await import('@/infrastructure/newsletter/api');
     await newsletterApi.fetchNewsletter();
 
     expect(capturedBaseUrl).toBe('/wp-hubspot-edm-editor/v1');

@@ -2,9 +2,9 @@ import React from 'react';
 import { describe, expect, it } from 'vitest';
 import { z } from 'zod';
 
-import { buildBlockConfigurationSchema } from '@/Domain/Document/buildBlockConfigurationSchema';
-import { buildBlockConfigurationDictionary } from '@/Domain/Document/buildBlockConfigurationDictionary';
-import { BlockNotFoundError } from '@/Domain/Document/utils';
+import { buildBlockConfigurationSchema } from '@/domain/document/buildBlockConfigurationSchema';
+import { buildBlockConfigurationDictionary } from '@/domain/document/buildBlockConfigurationDictionary';
+import { BlockNotFoundError } from '@/domain/document/utils';
 
 const TextSchema = z.object({ text: z.string() });
 const ImageSchema = z.object({ src: z.string() });

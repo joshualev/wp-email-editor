@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
-import { POST_BLOCK_SCHEMA } from '@/Domain/Blocks/block-post/schema';
-import { TEXT_BLOCK_SCHEMA } from '@/Domain/Blocks/block-text/schema';
-import { HEADING_BLOCK_SCHEMA } from '@/Domain/Blocks/block-heading/schema';
-import { IMAGE_BLOCK_SCHEMA } from '@/Domain/Blocks/block-image/schema';
-import { BUTTON_BLOCK_SCHEMA } from '@/Domain/Blocks/block-button/schema';
+import { POST_BLOCK_SCHEMA } from '@/domain/blocks/block-post/schema';
+import { TEXT_BLOCK_SCHEMA } from '@/domain/blocks/block-text/schema';
+import { HEADING_BLOCK_SCHEMA } from '@/domain/blocks/block-heading/schema';
+import { IMAGE_BLOCK_SCHEMA } from '@/domain/blocks/block-image/schema';
+import { BUTTON_BLOCK_SCHEMA } from '@/domain/blocks/block-button/schema';
 
 const createValidTextComponent = () => ({
   type: 'Text' as const,

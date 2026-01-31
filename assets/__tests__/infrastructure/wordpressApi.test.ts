@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 let capturedBaseUrl: string | null = null;
 const requestMock = vi.fn();
 
-vi.mock('@/Infrastructure/client', () => ({
+vi.mock('@/infrastructure/client', () => ({
   createApiClient: (baseUrl: string) => {
     capturedBaseUrl = baseUrl;
     return { request: requestMock };
@@ -29,7 +29,7 @@ describe('wordpressApi', () => {
       })
       .mockResolvedValueOnce({ data: {} });
 
-    const { wordpressApi } = await import('@/Infrastructure/WordPress/api');
+    const { wordpressApi } = await import('@/infrastructure/wordpress/api');
     await wordpressApi.updateSettings({ hubspotAccessToken: 'new-token' });
 
     expect(capturedBaseUrl).toBe('wp/v2');

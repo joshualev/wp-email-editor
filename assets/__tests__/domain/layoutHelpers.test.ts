@@ -8,7 +8,7 @@ import {
   PADDING_SCHEMA,
   RESPONSIVE_HORIZONTAL_ALIGN_SCHEMA,
   getResponsiveAlignment,
-} from '@/Domain/Blocks/helpers/layout';
+} from '@/domain/blocks/helpers/layout';
 
 describe('layout helpers', () => {
   describe('PADDING_SCHEMA', () => {

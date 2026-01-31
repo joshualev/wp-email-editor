@@ -10,10 +10,10 @@ import {
   TEXT_SIZE_VALUES,
   TYPOGRAPHY_SCHEMA,
   getResponsiveTextAlign,
-} from '@/Domain/Blocks/helpers/typography';
+} from '@/domain/blocks/helpers/typography';
 
-import { HORIZONTAL_ALIGN_VALUES } from '@/Domain/Blocks/helpers/layout';
-import { FONT_FAMILY_NAMES } from '@/Domain/Blocks/helpers/constants/fontFamily';
+import { HORIZONTAL_ALIGN_VALUES } from '@/domain/blocks/helpers/layout';
+import { FONT_FAMILY_NAMES } from '@/domain/blocks/helpers/constants/fontFamily';
 
 describe('typography helpers', () => {
   describe('RESPONSIVE_TEXT_ALIGN_SCHEMA', () => {

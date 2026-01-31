@@ -5,10 +5,10 @@ import {
   getFontFamily,
   getFontSize,
   getPadding,
-} from '@/Domain/Blocks/helpers/utils';
+} from '@/domain/blocks/helpers/utils';
 
-import { TEXT_SIZE_VALUES } from '@/Domain/Blocks/helpers/typography';
-import { FONT_FAMILIES } from '@/Domain/Blocks/helpers/constants/fontFamily';
+import { TEXT_SIZE_VALUES } from '@/domain/blocks/helpers/typography';
+import { FONT_FAMILIES } from '@/domain/blocks/helpers/constants/fontFamily';
 
 describe('utils helpers', () => {
   describe('getPadding', () => {

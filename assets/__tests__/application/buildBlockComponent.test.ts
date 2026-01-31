@@ -2,8 +2,8 @@ import React from 'react';
 import { describe, expect, it } from 'vitest';
 import { z } from 'zod';
 
-import { buildBlockConfigurationDictionary } from '@/Domain/Document/buildBlockConfigurationDictionary';
-import { buildBlockComponent } from '@/Application/components/Editor/buildBlockComponent';
+import { buildBlockConfigurationDictionary } from '@/domain/document/buildBlockConfigurationDictionary';
+import { buildBlockComponent } from '@/application/components/editor/buildBlockComponent';
 
 const TextSchema = z.object({ text: z.string() });
 

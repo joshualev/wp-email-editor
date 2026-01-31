@@ -3,8 +3,8 @@ import { describe, expect, it } from 'vitest';
 import {
   EmailLayoutBlockPropsSchema,
   EmailLayoutBlockSchema,
-} from '@/Domain/Blocks/block-email-layout/schema';
-import { FONT_FAMILY_NAMES } from '@/Domain/Blocks/helpers/constants/fontFamily';
+} from '@/domain/blocks/block-email-layout/schema';
+import { FONT_FAMILY_NAMES } from '@/domain/blocks/helpers/constants/fontFamily';
 
 describe('EmailLayoutBlockPropsSchema', () => {
   describe('defaults', () => {
