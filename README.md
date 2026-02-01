@@ -59,14 +59,11 @@ wp-hubspot-edm-editor is an enterprise-grade WordPress plugin designed to stream
 
 ### Key Capabilities
 
-- ✅ Drag-and-drop block editor with Atlassian Pragmatic DnD
-- ✅ Real-time preview with desktop/mobile viewport switching
-- ✅ WordPress post type integration (posts, events, sponsored content)
-- ✅ HubSpot HubDB synchronization
-- ✅ Zod-based schema validation
-- ✅ Type-safe state management with Zustand
-- ✅ Material UI component library
-- ✅ Role-based access control (Admin/Editor permissions)
+- Drag-and-drop block editor
+- Real-time preview with desktop/mobile viewport switching
+- HubSpot HubDB synchronization
+- Schema validation
+- Role-based access control (Admin/Editor permissions)
 
 ---
 
@@ -228,13 +225,6 @@ npm run dev
 
 This starts webpack in watch mode with hot module reloading. Changes to TypeScript/React files will automatically rebuild.
 
-### Code Formatting
-
-```bash
-cd assets
-npm run format
-```
-
 ### Project Scripts
 
 | Script | Command | Description |
@@ -253,29 +243,6 @@ npm install
 npm test
 ```
 
-### TypeScript Configuration
-
-The project uses strict TypeScript with path aliases:
-
-```json
-{
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./*"]
-    }
-  }
-}
-```
-
-Import examples:
-
-```typescript
-import { newsletterApi } from '@/Infrastructure/Newsletter/api';
-import useEditorStore from '@/Application/store/editorStore';
-import { ButtonBlock } from '@/Domain/Blocks';
-```
-
 ---
 
 ## TODOs (Production)
@@ -283,6 +250,7 @@ import { ButtonBlock } from '@/Domain/Blocks';
 - TODO: Use `wp-hubspot-edm-editor_data.postTypes` as the single source of truth for the BlogPost block dropdown (render choices from settings, not from runtime detection alone).
 - TODO: Add an admin settings UI to curate the allowed WordPress post types and persist them to `wp-hubspot-edm-editor_data.postTypes`.
 - TODO: Handle drift when post types are removed/renamed in WordPress (e.g., warn and auto-clean settings).
+- TODO: Remove the HubSpot SDK and use the HubSpot REST API directly to reduce dependency and simplify maintenance.
 
 ## Building for Production
 
@@ -322,29 +290,33 @@ wp-hubspot-edm-editor/
 │   ├── tsconfig.json               # TypeScript configuration
 │   ├── webpack.config.js           # Webpack bundler config
 │   │
-│   ├── Application/           # React application layer
-│   │   ├── App.tsx               # Root component
-│   │   ├── scripts.tsx           # Entry point
-│   │   ├── theme.ts              # MUI theme configuration
-│   │   ├── components/           # UI components
-│   │   │   ├── Editor/             # Main editor components
-│   │   │   ├── InspectorDrawer/    # Block property panels
-│   │   │   └── Toolbar/            # Editor toolbar
-│   │   ├── pages/            # Page components
-│   │   └── store/            # Zustand state management
+│   ├── __tests__/                # Frontend tests (Vitest)
+│   ├── application/             # React application layer
+│   │   ├── App.tsx                 # Root component
+│   │   ├── scripts.tsx             # Entry point
+│   │   ├── theme.ts                # MUI theme configuration
+│   │   ├── components/             # UI components
+│   │   │   ├── blocks/               # Render-only block components
+│   │   │   ├── editor/               # Main editor components
+│   │   │   ├── inspector-drawer/     # Block property panels
+│   │   │   ├── setup/                # HubSpot setup UI
+│   │   │   └── toolbar/              # Editor toolbar
+│   │   ├── pages/                  # Page components
+│   │   └── store/                  # Zustand state management
 │   │
-│   ├── Domain/               # Business logic layer
-│   │   ├── types.ts            # Domain type definitions
-│   │   ├── Blocks/             # Block definitions & schemas
-│   │   └── Document/           # Document utilities
+│   ├── domain/                  # Business logic layer
+│   │   ├── types.ts                # Domain type definitions
+│   │   ├── blocks/                 # Block definitions & schemas
+│   │   └── document/               # Document utilities
 │   │
-│   ├── Infrastructure/       # External integrations
-│   │   ├── client.ts           # API client
-│   │   ├── Newsletter/         # HubSpot API integration
-│   │   └── Wordpress/          # WordPress API integration
+│   ├── infrastructure/          # External integrations
+│   │   ├── client.ts               # API client
+│   │   ├── newsletter/             # HubSpot API integration
+│   │   └── wordpress/              # WordPress API integration
 │   │
-│   ├── lib/                    # Utility libraries
-│   └── utils/                  # Helper functions
+│   └── lib/                     # Utility libraries
+│       ├── format.ts               # Formatting helpers
+│       └── queryKeyFactory.ts      # Query key helpers
 │
 ├── includes/                 # PHP backend
 │   ├── Core/                   # Core plugin functionality
@@ -535,7 +507,6 @@ The template includes comprehensive email client support:
 
 ### Code Standards
 
-- **PHP**: Follow WordPress Coding Standards
 - **TypeScript**: Strict mode enabled, ESLint rules apply
 - **React**: Functional components with hooks
 - **State**: Use Zustand store for global state
@@ -578,25 +549,6 @@ npm run build
 2. Create a new HubDB table or enter existing table ID
 3. Ensure table has proper column structure
 
-#### TypeScript Compilation Errors
-
-**Cause**: Missing type definitions or version mismatch.
-
-**Solution**:
-
-```bash
-cd assets
-rm -rf node_modules
-npm install
-npm run build
-```
-
----
-
-## License
-
-This is proprietary software developed for wp-hubspot-edm-editor. All rights reserved.
-
 ---
 
 ## Support
@@ -604,4 +556,4 @@ This is proprietary software developed for wp-hubspot-edm-editor. All rights res
 For support inquiries, please contact the development team or open an issue in the repository.
 
 **Author**: Joshua Levinson  
-**Version**: 1.1.1
+**Version**: 1.1.2

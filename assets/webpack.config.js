@@ -4,7 +4,7 @@ const path = require("path");
 module.exports = {
 	...defaultConfig,
 	entry: {
-		scripts: path.resolve(process.cwd(), "Application", "scripts.tsx")
+		scripts: path.resolve(process.cwd(), "application", "scripts.tsx")
 	},
 	output: {
 		filename: "[name].js", // Dynamically name your bundles
