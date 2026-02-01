@@ -59,14 +59,11 @@ wp-hubspot-edm-editor is an enterprise-grade WordPress plugin designed to stream
 
 ### Key Capabilities
 
-- ✅ Drag-and-drop block editor with Atlassian Pragmatic DnD
-- ✅ Real-time preview with desktop/mobile viewport switching
-- ✅ WordPress post type integration (posts, events, sponsored content)
-- ✅ HubSpot HubDB synchronization
-- ✅ Zod-based schema validation
-- ✅ Type-safe state management with Zustand
-- ✅ Material UI component library
-- ✅ Role-based access control (Admin/Editor permissions)
+- Drag-and-drop block editor
+- Real-time preview with desktop/mobile viewport switching
+- HubSpot HubDB synchronization
+- Schema validation
+- Role-based access control (Admin/Editor permissions)
 
 ---
 
@@ -228,13 +225,6 @@ npm run dev
 
 This starts webpack in watch mode with hot module reloading. Changes to TypeScript/React files will automatically rebuild.
 
-### Code Formatting
-
-```bash
-cd assets
-npm run format
-```
-
 ### Project Scripts
 
 | Script | Command | Description |
@@ -251,29 +241,6 @@ npm run format
 cd assets
 npm install
 npm test
-```
-
-### TypeScript Configuration
-
-The project uses strict TypeScript with path aliases:
-
-```json
-{
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./*"]
-    }
-  }
-}
-```
-
-Import examples:
-
-```typescript
-import { newsletterApi } from '@/infrastructure/newsletter/api';
-import useEditorStore from '@/application/store/editorStore';
-import { ButtonBlock } from '@/domain/blocks';
 ```
 
 ---
