@@ -15,7 +15,7 @@ import { ResponsiveHorizontalAlignValue } from '@/domain/blocks/helpers/layout';
 
 import RadioGroupInput from './inputs/RadioGroupInput';
 import TextInput from './inputs/TextInput';
-import ColorInput from './inputs/color-input';
+import ColorInput from './inputs/color-input/ColorInput';
 import PaddingInput from './inputs/PaddingInput';
 import TextDimensionInput from './inputs/TextDimensionInput';
 import ResponsiveAlignmentInput from './inputs/ResponsiveAlignmentInput';

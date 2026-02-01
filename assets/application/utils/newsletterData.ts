@@ -1,5 +1,5 @@
-import type { TEditorConfiguration } from '@/application/components/editor/editor-core';
-import { EditorConfigurationSchema } from '@/application/components/editor/editor-core';
+import type { TEditorConfiguration } from '@/application/components/editor/EditorRegistry';
+import { EditorConfigurationSchema } from '@/application/components/editor/EditorRegistry';
 
 export type NewsletterLoadStatus = 'configured' | 'unconfigured' | 'empty' | 'invalid';
 

@@ -11,7 +11,7 @@ import {
 
 import { Square, Columns2, Columns3, Columns4 } from 'lucide-react';
 
-import { TEditorBlock } from '@/application/components/editor/editor-core';
+import { TEditorBlock } from '@/application/components/editor/EditorRegistry';
 
 import { ImageBlockPropsDefaults } from '@/domain/blocks/block-image';
 import { HeadingBlockPropsDefaults } from '@/domain/blocks/block-heading';
@@ -92,11 +92,12 @@ export const ROW_BUTTONS_CONFIG: TButtonProps[] = [
     block: () => ({
       type: 'ColumnsContainer',
       data: {
+        fullWidth: false,
         widths: [600],
         contentAlignment: 'top',
         childrenIds: [[], [], [], []],
         layout: {
-          background: { color: '#FFFFFF' },
+          background: { color: 'transparent' },
           padding: { top: 10, bottom: 10, left: 0, right: 0 },
         },
         hidden: false,
@@ -109,11 +110,12 @@ export const ROW_BUTTONS_CONFIG: TButtonProps[] = [
     block: () => ({
       type: 'ColumnsContainer',
       data: {
+        fullWidth: false,
         widths: [300, 300],
         contentAlignment: 'top',
         childrenIds: [[], [], [], []],
         layout: {
-          background: { color: '#FFFFFF' },
+          background: { color: 'transparent' },
           padding: { top: 10, bottom: 10, left: 0, right: 0 },
         },
         hidden: false,
@@ -126,11 +128,12 @@ export const ROW_BUTTONS_CONFIG: TButtonProps[] = [
     block: () => ({
       type: 'ColumnsContainer',
       data: {
+        fullWidth: false,
         widths: [200, 200, 200],
         contentAlignment: 'top',
         childrenIds: [[], [], [], []],
         layout: {
-          background: { color: '#FFFFFF' },
+          background: { color: 'transparent' },
           padding: { top: 10, bottom: 10, left: 0, right: 0 },
         },
         hidden: false,
@@ -143,11 +146,12 @@ export const ROW_BUTTONS_CONFIG: TButtonProps[] = [
     block: () => ({
       type: 'ColumnsContainer',
       data: {
+        fullWidth: false,
         widths: [150, 150, 150, 150],
         contentAlignment: 'top',
         childrenIds: [[], [], [], []],
         layout: {
-          background: { color: '#FFFFFF' },
+          background: { color: 'transparent' },
           padding: { top: 10, bottom: 10, left: 0, right: 0 },
         },
         hidden: false,

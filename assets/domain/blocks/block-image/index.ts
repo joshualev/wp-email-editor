@@ -1,5 +1,5 @@
 /**
- * block-image/index.tsx - Image Block Schema + Defaults
+ * block-image/index.ts - Image Block Schema + Defaults
  *
  * Schema: ImageBlockSchema (from ./schema.ts)
  * - type: 'Image' (discriminator)

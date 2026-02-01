@@ -21,7 +21,7 @@ import { IconButton, Tooltip } from '@mui/material';
 import { SaveOutlined } from '@mui/icons-material';
 import toast from 'react-hot-toast';
 
-import type { TEditorConfiguration } from '@/application/components/editor/editor-core';
+import type { TEditorConfiguration } from '@/application/components/editor/EditorRegistry';
 import useEditorStore from '@/application/store/editorStore';
 import { newsletterApi } from '@/infrastructure/newsletter/api';
 import { queryKeys } from '@/lib/queryKeyFactory';

@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { AlignVerticalTop, AlignVerticalCenter, AlignVerticalBottom } from '@mui/icons-material';
 
-import ColorInput from './inputs/color-input';
+import { NullableColorInput } from './inputs/color-input/ColorInput';
 import { ColumnControl } from './inputs/ColumnControl';
 import PaddingInput from './inputs/PaddingInput';
 
@@ -151,16 +151,19 @@ export default function ColumnsContainerBlockForm({ data, setData }: ColumnsCont
         </Box>
       )}
 
-      <ColorInput
-        label="Background Color"
-        defaultValue={data.layout.background.color}
+      <NullableColorInput
+        label="Background Color (optional)"
+        defaultValue={data.layout.background.color === 'transparent' ? null : data.layout.background.color}
         onChange={(color) => updateData({
           layout: {
             ...data.layout,
-            background: { ...data.layout.background, color },
+            background: { ...data.layout.background, color: color ?? 'transparent' },
           },
         })}
       />
+      <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 2 }}>
+        Clear to use the canvas background.
+      </Typography>
 
     <PaddingInput
         label="Vertical Padding"

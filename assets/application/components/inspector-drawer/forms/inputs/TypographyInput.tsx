@@ -21,7 +21,7 @@ import {
   ResponsiveTextAlignValue,
 } from '@/domain/blocks/helpers/typography';
 import { FONT_FAMILIES } from '@/domain/blocks/helpers/constants/fontFamily';
-import ColorInput from './color-input';
+import ColorInput from './color-input/ColorInput';
 import SelectInput from './SelectInput';
 import ToggleButtonGroupInput, { StyledToggleButtonGroup } from './ToggleButtonGroupInput';
 import ResponsiveAlignmentInput from './ResponsiveAlignmentInput';

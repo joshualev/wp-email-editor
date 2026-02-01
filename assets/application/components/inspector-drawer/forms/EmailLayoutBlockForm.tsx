@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { z } from 'zod';
 import { EmailLayoutBlockPropsSchema, EmailLayoutBlockPropsType } from '@/domain/blocks/block-email-layout/schema';
 
-import ColorInput from './inputs/color-input';
+import ColorInput from './inputs/color-input/ColorInput';
 import { FontFamilyInput } from './inputs/TypographyInput';
 import { Stack, Box } from '@mui/material';
 

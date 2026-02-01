@@ -1,11 +1,11 @@
 /**
- * domain/blocks/index.tsx - Block Schemas Export Hub
+ * domain/blocks/index.ts - Block Schemas Export Hub
  *
  * Central export file for all email block schemas, types, and defaults.
  * React render components now live in application/components/blocks.
  *
  * Each block type is self-contained in its own folder with:
- * - index.tsx: Zod schema exports, types, and defaults
+ * - index.ts: Zod schema exports, types, and defaults
  * - schema.ts: Zod validation schema definitions
  *
  * Block Categories:

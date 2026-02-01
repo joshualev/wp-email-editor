@@ -28,7 +28,7 @@
  *
  * @module infrastructure/newsletter
  */
-import type { TEditorConfiguration } from '@/application/components/editor/editor-core';
+import type { TEditorConfiguration } from '@/application/components/editor/EditorRegistry';
 import type { NewsletterTypes } from './types';
 import { newsletterSchemas } from './types';
 

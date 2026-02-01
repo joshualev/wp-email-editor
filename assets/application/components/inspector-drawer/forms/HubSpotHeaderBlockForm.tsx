@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, FormControlLabel, Switch, styled } from '@mui/material';
-import ColorInput from './inputs/color-input';
+import ColorInput from './inputs/color-input/ColorInput';
 import { HubSpotHeaderBlockPropsType } from '@/domain/blocks';
 
 const StyledSwitch = styled(Switch)(({ theme }) => ({

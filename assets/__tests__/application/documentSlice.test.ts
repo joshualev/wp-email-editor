@@ -4,7 +4,7 @@ import { create } from 'zustand';
 import { createDocumentSlice } from '@/application/store/slices/documentSlice';
 import { createUISlice } from '@/application/store/slices/uiSlice';
 import type { TEditorStore } from '@/application/store/types';
-import type { TEditorConfiguration } from '@/application/components/editor/editor-core';
+import type { TEditorConfiguration } from '@/application/components/editor/EditorRegistry';
 import { ImageBlockPropsDefaults } from '@/domain/blocks/block-image';
 import { BlogPostBlockPropsDefaults } from '@/domain/blocks/block-post';
 

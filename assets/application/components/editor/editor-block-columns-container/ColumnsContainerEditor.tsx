@@ -13,6 +13,12 @@ export default function ColumnsContainerEditor(props: EditorProps) {
   const selectedScreenSize = useEditorStore((state) => state.selectedScreenSize);
   const isMobile = selectedScreenSize === 'mobile';
 
+  const document = useEditorStore((state) => state.document);
+  const rootBlock = document['root'];
+  const canvasColor = rootBlock?.type === 'EmailLayout'
+    ? (rootBlock.data as any).canvasColor
+    : undefined;
+
   const columnContents = props.childrenIds.map((columnIds, index) => {
     if (index >= props.widths.length) return null;
 
@@ -31,5 +37,5 @@ export default function ColumnsContainerEditor(props: EditorProps) {
     ));
   });
 
-  return <ColumnsContainerBlock {...props} isMobile={isMobile} children={columnContents} />;
+  return <ColumnsContainerBlock {...props} isMobile={isMobile} defaultBackgroundColor={canvasColor} children={columnContents} />;
 }

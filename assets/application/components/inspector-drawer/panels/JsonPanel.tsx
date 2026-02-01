@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { TEditorBlock, TEditorConfiguration } from '@/application/components/editor/editor-core';
+import { TEditorBlock, TEditorConfiguration } from '@/application/components/editor/EditorRegistry';
 import useEditorStore from '@/application/store/editorStore';
 
-export default function JsonPanel(){
+export default function JsonPanel() {
   const document = useEditorStore((state) => state.document);
   const selectedBlockId = useEditorStore((state) => state.selectedBlockId);
 

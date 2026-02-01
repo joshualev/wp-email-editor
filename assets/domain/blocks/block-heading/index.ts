@@ -1,5 +1,5 @@
 /**
- * block-heading/index.tsx - Heading Block Schema + Defaults
+ * block-heading/index.ts - Heading Block Schema + Defaults
  *
  * Schema: HeadingBlockSchema (from ./schema.ts)
  * - type: 'Heading' (discriminator)

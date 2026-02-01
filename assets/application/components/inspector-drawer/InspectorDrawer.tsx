@@ -1,5 +1,5 @@
 /**
- * InspectorDrawer/index.tsx - Side Panel Inspector Component
+ * InspectorDrawer.tsx - Side Panel Inspector Component
  *
  * A persistent drawer on the right side of the editor that provides
  * block configuration and styling controls. Contains tabbed panels

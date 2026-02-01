@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Box, Menu } from '@mui/material';
 
-import { TEditorBlock } from '@/application/components/editor/editor-core';
+import { TEditorBlock } from '@/application/components/editor/EditorRegistry';
 
 import AddBlockMenuButton from './AddBlockMenuButton';
 import { COMPONENT_BUTTONS_CONFIG, ROW_BUTTONS_CONFIG } from './addBlockMenuButtonsConfig';

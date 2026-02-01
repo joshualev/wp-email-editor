@@ -1,6 +1,6 @@
 // Editor.tsx
 import React, { createContext, useContext } from 'react';
-import { EditorBlock as CoreEditorBlock } from './editor-core';
+import { EditorBlock as CoreEditorBlock } from './EditorRegistry';
 import useEditorStore from '@/application/store/editorStore';
 
 const EditorBlockContext = createContext<string | null>(null);

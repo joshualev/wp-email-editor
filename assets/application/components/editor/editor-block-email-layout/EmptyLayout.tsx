@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { AddOutlined } from '@mui/icons-material';
 import { Box, ButtonBase, Typography } from '@mui/material';
 import { AddRowBlockMenu } from '@/application/components/editor/editor-block-wrapper/block-builder-layer/add-block-menu/AddBlockMenu';
-import { TEditorBlock } from '@/application/components/editor/editor-core';
+import { TEditorBlock } from '@/application/components/editor/EditorRegistry';
 import useEditorStore from '@/application/store/editorStore';
 
 type Props = {
-    rootId: string;
+  rootId: string;
 };
 
 export default function EmptyLayout({ rootId }: Props) {
@@ -24,7 +24,7 @@ export default function EmptyLayout({ rootId }: Props) {
 
   return (
     <>
-      <Box 
+      <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
@@ -39,14 +39,14 @@ export default function EmptyLayout({ rootId }: Props) {
         <Typography variant="h6" gutterBottom>
           Start Building Your Email
         </Typography>
-        <Typography 
-          variant="body2" 
-          color="text.secondary" 
+        <Typography
+          variant="body2"
+          color="text.secondary"
           sx={{ mb: 3 }}
         >
           Add rows to organize your content
         </Typography>
-        
+
         <ButtonBase
           onClick={handleButtonClick}
           sx={{
@@ -70,10 +70,10 @@ export default function EmptyLayout({ rootId }: Props) {
         </ButtonBase>
       </Box>
 
-      <AddRowBlockMenu 
-        anchorEl={menuAnchorEl} 
-        setAnchorEl={setMenuAnchorEl} 
-        onSelect={handleBlockSelect} 
+      <AddRowBlockMenu
+        anchorEl={menuAnchorEl}
+        setAnchorEl={setMenuAnchorEl}
+        onSelect={handleBlockSelect}
       />
     </>
   );

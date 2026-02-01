@@ -24,7 +24,7 @@
  * @see NewsletterController (PHP) For backend handling
  * @module infrastructure/newsletter
  */
-import type { TEditorConfiguration } from '@/application/components/editor/editor-core';
+import type { TEditorConfiguration } from '@/application/components/editor/EditorRegistry';
 
 import { createApiClient } from '@/infrastructure/client';
 import { newsletterTransform } from '@/infrastructure/newsletter/transform';

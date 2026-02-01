@@ -1,7 +1,7 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
 
-import { TEditorBlock } from '@/application/components/editor/editor-core';
+import { TEditorBlock } from '@/application/components/editor/EditorRegistry';
 import useEditorStore from '@/application/store/editorStore';
 
 import { AddComponentBlockMenu } from '@/application/components/editor/editor-block-wrapper/block-builder-layer/add-block-menu/AddBlockMenu';
@@ -80,18 +80,18 @@ export default function EmptyColumn({ parentId, columnIndex }: EmptyColumnProps)
           position: 'relative',
           zIndex: 100,
           border: '1px dashed',
-          borderColor: isDropTarget 
-            ? 'rgba(37, 99, 235, 0.3)' 
+          borderColor: isDropTarget
+            ? 'rgba(37, 99, 235, 0.3)'
             : 'rgba(0, 0, 0, 0.08)',
           borderRadius: 0,
-          backgroundColor: isDropTarget 
-            ? 'rgba(37, 99, 235, 0.04)' 
+          backgroundColor: isDropTarget
+            ? 'rgba(37, 99, 235, 0.04)'
             : 'transparent',
           transition: 'all 0.2s ease-in-out',
         }}
       >
         {!isMobileView && (
-          <Box 
+          <Box
             ref={clickAreaRef}
             onClick={handleClick}
             sx={{
@@ -138,7 +138,7 @@ export default function EmptyColumn({ parentId, columnIndex }: EmptyColumnProps)
       </Box>
 
       {!isMobileView && (
-        <AddComponentBlockMenu 
+        <AddComponentBlockMenu
           anchorEl={menuAnchorEl}
           setAnchorEl={setMenuAnchorEl}
           onSelect={handleBlockSelect}

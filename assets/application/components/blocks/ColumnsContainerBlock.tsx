@@ -24,19 +24,24 @@ export function ColumnsContainerBlock({
   fullWidth,
   children,
   isMobile = false,
-}: ColumnsContainerBlockPropsType & { children: React.ReactNode[]; isMobile?: boolean }) {
+  defaultBackgroundColor,
+}: ColumnsContainerBlockPropsType & { children: React.ReactNode[]; isMobile?: boolean; defaultBackgroundColor?: string }) {
+  const effectiveBackgroundColor = (!fullWidth && layout.background.color === 'transparent' && defaultBackgroundColor)
+    ? defaultBackgroundColor
+    : layout.background.color;
+
   const wrapperStyle: CSSProperties = fullWidth
     ? {
-        backgroundColor: layout.background.color,
-        width: '100%',
-      }
+      backgroundColor: layout.background.color,
+      width: '100%',
+    }
     : {};
 
   const containerStyle: CSSProperties = {
     display: 'flex',
     flexDirection: isMobile ? 'column' : 'row',
     padding: getPadding(layout.padding),
-    backgroundColor: fullWidth ? 'transparent' : layout.background.color,
+    backgroundColor: fullWidth ? 'transparent' : effectiveBackgroundColor,
     width: isMobile ? '100%' : '600px',
     margin: '0 auto',
   };

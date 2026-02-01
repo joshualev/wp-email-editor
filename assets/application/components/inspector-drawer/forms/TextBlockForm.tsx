@@ -3,7 +3,7 @@ import { TextBlockPropsType, TextBlockPropsSchema } from '@/domain/blocks/block-
 import { z } from 'zod';
 
 import TextInput from './inputs/TextInput';
-import ColorInput from './inputs/color-input';
+import ColorInput from './inputs/color-input/ColorInput';
 import PaddingInput from './inputs/PaddingInput';
 import TypographyInput from './inputs/TypographyInput';
 

@@ -1,5 +1,5 @@
 /**
- * block-button/index.tsx - Button Block Schema + Defaults
+ * block-button/index.ts - Button Block Schema + Defaults
  *
  * Schema: ButtonBlockSchema (from ./schema.ts)
  * - type: 'Button' (discriminator)

@@ -30,6 +30,7 @@ import {
   StepLabel,
   Button
 } from '@mui/material';
+import toast from 'react-hot-toast';
 import { Settings as SettingsIcon } from '@mui/icons-material';
 import { useMutation } from '@tanstack/react-query';
 import { newsletterApi } from '@/infrastructure/newsletter/api';
@@ -86,7 +87,7 @@ export default function Settings() {
       setActiveStep(1);
     } catch (error) {
       console.error('API Key verification failed:', error);
-      // Handle error (show error message)
+      toast.error('Invalid API Key provided. Please check your key and try again.');
     }
   };
 
@@ -96,10 +97,10 @@ export default function Settings() {
       setHubSpotConfigured(true);
       setOpen(false);
       setActiveStep(0);
-      // Show success message
+      toast.success('Table created successfully!');
     } catch (error) {
       console.error('Table creation failed:', error);
-      // Handle error
+      toast.error('Failed to create HubSpot table.');
     }
   };
 

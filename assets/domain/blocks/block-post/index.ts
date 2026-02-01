@@ -1,5 +1,5 @@
 /**
- * block-post/index.tsx - Blog Post Block Schema + Defaults
+ * block-post/index.ts - Blog Post Block Schema + Defaults
  *
  * Schema: BlogPostBlockSchema (from ./schema.ts)
  * - type: 'BlogPost' (discriminator)

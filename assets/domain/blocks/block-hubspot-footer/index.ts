@@ -1,5 +1,5 @@
 /**
- * block-hubspot-footer/index.tsx - HubSpot Footer Schema
+ * block-hubspot-footer/index.ts - HubSpot Footer Schema
  *
  * Schema: HubSpotFooterBlockSchema (from ./schema.ts)
  * - type: 'HubSpotFooter' (discriminator)

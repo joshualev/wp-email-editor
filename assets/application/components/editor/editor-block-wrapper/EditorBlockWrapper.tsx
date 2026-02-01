@@ -14,7 +14,7 @@ import { pointerOutsideOfPreview } from '@atlaskit/pragmatic-drag-and-drop/eleme
 import useEditorStore from '@/application/store/editorStore';
 
 import { useCurrentBlockId } from '@/application/components/editor/EditorBlock';
-import BlockBuilderLayer from './block-builder-layer';
+import BlockBuilderLayer from './block-builder-layer/BlockBuilderLayer';
 
 // Types
 type ValidEdge = 'top' | 'bottom';

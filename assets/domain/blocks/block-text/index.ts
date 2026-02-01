@@ -1,5 +1,5 @@
 /**
- * block-text/index.tsx - Text Block Schema + Defaults
+ * block-text/index.ts - Text Block Schema + Defaults
  *
  * Schema: TextBlockSchema (from ./schema.ts)
  * - type: 'Text' (discriminator)

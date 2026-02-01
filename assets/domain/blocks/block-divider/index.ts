@@ -1,5 +1,5 @@
 /**
- * block-divider/index.tsx - Divider Block Schema + Defaults
+ * block-divider/index.ts - Divider Block Schema + Defaults
  *
  * Schema: DividerBlockSchema (from ./schema.ts)
  * - type: 'Divider' (discriminator)

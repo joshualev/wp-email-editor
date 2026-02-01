@@ -1,5 +1,5 @@
 /**
- * Toolbar/index.tsx - Main Editor Toolbar Component
+ * Toolbar.tsx - Main Editor Toolbar Component
  *
  * Provides the primary toolbar for the EDM editor interface, positioned
  * at the top of the editor area. Contains action buttons and view controls.
@@ -11,7 +11,6 @@
  * - Inspector drawer visibility control
  *
  * Behavior:
- * - Toolbar is sticky positioned below the WordPress admin bar
  * - Inspector toggle is hidden when in mobile preview mode
  * - Screen size toggle affects all editor block rendering
  *

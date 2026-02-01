@@ -36,7 +36,7 @@ import { EMPTY_DOCUMENT } from '@/application/store/slices/documentSlice';
 import { normalizeNewsletterData } from '@/application/utils/newsletterData';
 
 import { Box, Stack, useTheme, CircularProgress } from '@mui/material';
-import InspectorDrawer, { INSPECTOR_DRAWER_WIDTH } from '@/application/components/inspector-drawer';
+import InspectorDrawer, { INSPECTOR_DRAWER_WIDTH } from '@/application/components/inspector-drawer/InspectorDrawer';
 import Editor from '@/application/components/editor/Editor';
 
 /**

@@ -1,5 +1,5 @@
 /**
- * block-columns-container/index.tsx - Columns Container Schema
+ * block-columns-container/index.ts - Columns Container Schema
  *
  * Schema: ColumnsContainerBlockSchema (from ./schema.ts)
  * - type: 'ColumnsContainer' (discriminator)

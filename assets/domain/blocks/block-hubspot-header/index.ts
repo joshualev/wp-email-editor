@@ -1,5 +1,5 @@
 /**
- * block-hubspot-header/index.tsx - HubSpot Header Schema
+ * block-hubspot-header/index.ts - HubSpot Header Schema
  *
  * Schema: HubSpotHeaderBlockSchema (from ./schema.ts)
  * - type: 'HubSpotHeader' (discriminator)

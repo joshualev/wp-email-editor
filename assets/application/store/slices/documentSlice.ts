@@ -42,7 +42,7 @@ import {
   TEditorStore,
   TDocumentSlice,
 } from '../types';
-import { TEditorBlock, TEditorConfiguration } from '@/application/components/editor/editor-core';
+import { TEditorBlock, TEditorConfiguration } from '@/application/components/editor/EditorRegistry';
 import { wordpressApi } from '@/infrastructure/wordpress/api';
 import { TWordPressPostType } from '@/infrastructure/wordpress/dto';
 import { TWordPressPost } from '@/domain/types';

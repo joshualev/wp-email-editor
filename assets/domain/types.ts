@@ -23,7 +23,7 @@ import { z } from 'zod';
 import {
   EditorBlockSchema,
   EditorConfigurationSchema
-} from '@/application/components/editor/editor-core';
+} from '@/application/components/editor/EditorRegistry';
 
 /*
 |--------------------------------------------------------------------------

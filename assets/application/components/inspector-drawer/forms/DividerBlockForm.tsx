@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { DividerBlockPropsType, DividerBlockPropsSchema } from '@/domain/blocks/block-divider';
 import { z } from 'zod';
 import { Minus, StretchVertical, StretchHorizontal } from 'lucide-react'
-import ColorInput from './inputs/color-input';
+import ColorInput from './inputs/color-input/ColorInput';
 import SliderInput from './inputs/SliderInput';
 import PaddingInput from './inputs/PaddingInput';
 import RadioGroupInput from './inputs/RadioGroupInput';

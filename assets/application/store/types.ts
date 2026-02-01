@@ -12,7 +12,7 @@
  *
  * @module application/store
  */
-import { TEditorConfiguration, TEditorBlock } from '@/application/components/editor/editor-core';
+import { TEditorConfiguration, TEditorBlock } from '@/application/components/editor/EditorRegistry';
 import { TWordPressPost } from '@/domain/types';
 
 /**

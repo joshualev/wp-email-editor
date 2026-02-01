@@ -34,7 +34,7 @@ import { extractClosestEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/clo
 import { Box, SxProps } from '@mui/material';
 import useEditorStore from '../../store/editorStore';
 import EditorBlock from '@/application/components/editor/EditorBlock';
-import Toolbar from '../Toolbar';
+import Toolbar from '../toolbar/Toolbar';
 import HubSpotSetupBanner from '@/application/components/setup/HubSpotSetupBanner';
 
 /** Edge type for drop positioning */

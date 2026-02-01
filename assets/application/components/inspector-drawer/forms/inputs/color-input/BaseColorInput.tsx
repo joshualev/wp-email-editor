@@ -65,6 +65,8 @@ export default function BaseColorInput({ label, defaultValue, onChange, nullable
     );
   };
 
+  const pickerValue = value ?? '#FFFFFF';
+
   return (
     <Stack alignItems="flex-start">
       {label && <InputLabel sx={{ mb: 0.5 }}>{label}</InputLabel>}
@@ -81,7 +83,7 @@ export default function BaseColorInput({ label, defaultValue, onChange, nullable
         }}
       >
         <Picker
-          value={value || ''}
+          value={pickerValue}
           onChange={(v) => {
             setValue(v);
             onChange(v);

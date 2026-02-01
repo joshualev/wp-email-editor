@@ -1,5 +1,5 @@
 /**
- * editor-core.tsx - Editor Block Registry
+ * EditorRegistry.tsx - Editor Block Registry
  *
  * This is the central configuration file for the block-based editor.
  * It registers all available block types, their validation schemas,
@@ -133,7 +133,7 @@ function TextBlockWithMobile(props: React.ComponentProps<typeof TextBlock>) {
 |
 */
 
-const EDITOR_DICTIONARY = buildBlockConfigurationDictionary({
+const EDITOR_REGISTRY = buildBlockConfigurationDictionary({
   EmailLayout: {
     schema: EmailLayoutBlockPropsSchema,
     Component: (props) => <EmailLayoutEditor {...props} />,
@@ -212,8 +212,8 @@ const EDITOR_DICTIONARY = buildBlockConfigurationDictionary({
   },
 });
 
-export const EditorBlock = buildBlockComponent(EDITOR_DICTIONARY);
-export const EditorBlockSchema = buildBlockConfigurationSchema(EDITOR_DICTIONARY);
+export const EditorBlock = buildBlockComponent(EDITOR_REGISTRY);
+export const EditorBlockSchema = buildBlockConfigurationSchema(EDITOR_REGISTRY);
 export const EditorConfigurationSchema = z.record(z.string(), EditorBlockSchema);
 
 export type TEditorBlock = z.infer<typeof EditorBlockSchema>;

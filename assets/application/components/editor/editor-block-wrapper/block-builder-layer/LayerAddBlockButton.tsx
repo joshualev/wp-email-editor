@@ -3,7 +3,7 @@ import { Box, IconButton, Tooltip } from '@mui/material';
 import { Plus } from 'lucide-react';
 import { LayerProps } from './types';
 import { AddRowBlockMenu, AddComponentBlockMenu } from './add-block-menu/AddBlockMenu';
-import { TEditorBlock } from '@/application/components/editor/editor-core';
+import { TEditorBlock } from '@/application/components/editor/EditorRegistry';
 import useEditorStore from '@/application/store/editorStore';
 
 interface LayerAddBlockButtonProps extends Partial<LayerProps> {
